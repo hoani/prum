@@ -20,6 +20,9 @@ import {
 
 import Image from 'react-native-scalable-image';
 
+import AreaChartExample from './src/charts/AreaChartExample';
+import ProgressCircleExample from './src/charts/ProgressCircleExample';
+
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen'; 
@@ -43,6 +46,7 @@ client.on('data', function(data) {
 });
 
 const App: () => React$Node = () => {
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -70,82 +74,90 @@ const App: () => React$Node = () => {
                 Manual Control
               </Text>
             </View>
-          </View>
-          <View style={{flex:1, flexDirection:'row'}}>
-            <View style={{flex:3, flexDirection:'column'}}>
-              <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
-                <View style={{flex:1, backgroundColor:"#eee"}} />
-                <View style={{flex:1}} >
-                  <Button
-                    onPress={() => {
-                      let packet = new leap.Packet(
-                        'set', 
-                        'control/manual', 
-                        ['FW', 0.2, 0.5]
-                      );
-                      let data = codec.encode(packet);
-                      alert(`Sent Forward command \n${data}`);
-                      client.write(data);
-                    }}
-                    title="Forward"
-                  />
+          
+            <View style={{flex:1, flexDirection:'row'}}>
+              <View style={{flex:10, flexDirection:'column'}}>
+                <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
+                  <View style={{flex:1, backgroundColor:"#eee"}} />
+                  <View style={{flex:1}} >
+                    <Button
+                      onPress={() => {
+                        let packet = new leap.Packet(
+                          'set', 
+                          'control/manual', 
+                          ['FW', 0.2, 0.5]
+                        );
+                        let data = codec.encode(packet);
+                        alert(`Sent Forward command \n${data}`);
+                        client.write(data);
+                      }}
+                      title="Forward"
+                    />
+                  </View>
+                  <View style={{flex:1, backgroundColor:"#eee"}} />
                 </View>
-                <View style={{flex:1, backgroundColor:"#eee"}} />
+                <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
+                  <View style={{flex:1}} >
+                    <Button
+                      onPress={() => {
+                        let packet = new leap.Packet(
+                          'set', 
+                          'control/manual', 
+                          ['LT', 0.2, 0.5]
+                        );
+                        let data = codec.encode(packet);
+                        alert(`Sent Left command \n${data}`);
+                        client.write(data)
+                      }}
+                      title="Left"
+                    />
+                  </View>
+                  <View style={{flex:1, backgroundColor:"#eee"}} />
+                  <View style={{flex:1}} >
+                    <Button
+                      onPress={() => {
+                        let packet = new leap.Packet(
+                          'set', 
+                          'control/manual', 
+                          ['RT', 0.2, 0.5]
+                        );
+                        let data = codec.encode(packet);
+                        alert(`Sent Right command \n${data}`);
+                        client.write(data)
+                      }}
+                      title="RIGHT"
+                    />
+                  </View>
+                </View>
+                <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
+                  <View style={{flex:1, backgroundColor:"#eee"}} />
+                  <View style={{flex:1}} >
+                    <Button
+                      onPress={() => {
+                        let packet = new leap.Packet(
+                          'set', 
+                          'control/manual', 
+                          ['BW', 0.2, 0.5]
+                        );
+                        let data = codec.encode(packet);
+                        alert(`Sent Reverse command \n${data}`);
+                        client.write(data)
+                      }}
+                      title="Reverse"
+                    />
+                  </View>
+                  <View style={{flex:1, backgroundColor:"#eee"}} />
+                </View>
               </View>
-              <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
-                <View style={{flex:1}} >
-                  <Button
-                    onPress={() => {
-                      let packet = new leap.Packet(
-                        'set', 
-                        'control/manual', 
-                        ['LT', 0.2, 0.5]
-                      );
-                      let data = codec.encode(packet);
-                      alert(`Sent Left command \n${data}`);
-                      client.write(data)
-                    }}
-                    title="Left"
-                  />
-                </View>
-                <View style={{flex:1, backgroundColor:"#eee"}} />
-                <View style={{flex:1}} >
-                  <Button
-                    onPress={() => {
-                      let packet = new leap.Packet(
-                        'set', 
-                        'control/manual', 
-                        ['RT', 0.2, 0.5]
-                      );
-                      let data = codec.encode(packet);
-                      alert(`Sent Right command \n${data}`);
-                      client.write(data)
-                    }}
-                    title="RIGHT"
-                  />
-                </View>
+              <View style={{flex:1}} />
+              <View style={{flex:3}} >
+                <ProgressCircleExample />
               </View>
-              <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
-                <View style={{flex:1, backgroundColor:"#eee"}} />
-                <View style={{flex:1}} >
-                  <Button
-                    onPress={() => {
-                      let packet = new leap.Packet(
-                        'set', 
-                        'control/manual', 
-                        ['BW', 0.2, 0.5]
-                      );
-                      let data = codec.encode(packet);
-                      alert(`Sent Reverse command \n${data}`);
-                      client.write(data)
-                    }}
-                    title="Reverse"
-                  />
-                </View>
-                <View style={{flex:1, backgroundColor:"#eee"}} />
-              </View>
+              <View style={{flex:1}} />
             </View>
-            <View style={{flex:2}} />
+            <View style={{flex:3}}>
+              <AreaChartExample></AreaChartExample>
+            </View>
           </View>
         </ScrollView>
       </SafeAreaView>
