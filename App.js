@@ -8,21 +8,33 @@
 
 import React from 'react';
 import {
+  Dimensions,
   SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
   Text,
   StatusBar,
+  Button,
 } from 'react-native';
 
+import Image from 'react-native-scalable-image';
+
 import {
-  Header,
-  LearnMoreLinks,
   Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+} from 'react-native/Libraries/NewAppScreen'; 
+
+const net = require('react-native-tcp-socket').default;
+
+const client = net.createConnection({port: 11337, host: '192.168.1.13' });
+ 
+client.on('error', function(error) {
+  console.log(error)
+});
+ 
+client.on('data', function(data) {
+  //console.log('message was received', data)
+});
 
 const App: () => React$Node = () => {
   return (
@@ -32,39 +44,82 @@ const App: () => React$Node = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <Header />
+          
           {global.HermesInternal == null ? null : (
             <View style={styles.engine}>
               <Text style={styles.footer}>Engine: Hermes</Text>
             </View>
           )}
           <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
+            <View style={{justifyContent:'center', alignItems:'center'}}>
+              <Image
+                resizeMode="center"
+                width={Dimensions.get('window').width}
+                source={require("./images/autodesk.png")} 
+              />
             </View>
             <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
+              <Text style={styles.sectionTitle}>Hoani's Robot Control</Text>
               <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
+                Manual Control
               </Text>
             </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
+          </View>
+          <View style={{flex:1, flexDirection:'row'}}>
+            <View style={{flex:3, flexDirection:'column'}}>
+              <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
+                <View style={{flex:1, backgroundColor:"#eee"}} />
+                <View style={{flex:1}} >
+                  <Button
+                    onPress={() => {
+                      let data = 'S8002:00:3f000000:3f000000\n';
+                      alert(`Sent Forward command \n${data}`);
+                      client.write(data);
+                    }}
+                    title="Forward"
+                  />
+                </View>
+                <View style={{flex:1, backgroundColor:"#eee"}} />
+              </View>
+              <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
+                <View style={{flex:1}} >
+                  <Button
+                    onPress={() => {
+                      let data = 'S8002:02:3f000000:3f000000\n';
+                      alert(`Sent Left command \n${data}`);
+                      client.write(data)
+                    }}
+                    title="Left"
+                  />
+                </View>
+                <View style={{flex:1, backgroundColor:"#eee"}} />
+                <View style={{flex:1}} >
+                  <Button
+                    onPress={() => {
+                      let data = 'S8002:03:3f000000:3f000000\n';
+                      alert(`Sent Right command \n${data}`);
+                      client.write(data)
+                    }}
+                    title="RIGHT"
+                  />
+                </View>
+              </View>
+              <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
+                <View style={{flex:1, backgroundColor:"#eee"}} />
+                <View style={{flex:1}} >
+                  <Button
+                    onPress={() => {
+                      let data = 'S8002:01:3f000000:3f000000\n';
+                      alert(`Sent Reverse command \n${data}`);
+                      client.write(data)
+                    }}
+                    title="Reverse"
+                  />
+                </View>
+                <View style={{flex:1, backgroundColor:"#eee"}} />
+              </View>
             </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
+            <View style={{flex:2}} />
           </View>
         </ScrollView>
       </SafeAreaView>
