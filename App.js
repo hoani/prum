@@ -25,15 +25,21 @@ import {
 } from 'react-native/Libraries/NewAppScreen'; 
 
 const net = require('react-native-tcp-socket').default;
+const leap = require('leap-protocol');
+
+import data from './protocol.json';
 
 const client = net.createConnection({port: 11337, host: '192.168.1.13' });
+
+const codec = new leap.Codec(data);
+console.log(codec);
  
 client.on('error', function(error) {
   console.log(error)
 });
  
 client.on('data', function(data) {
-  //console.log('message was received', data)
+  //console.log('message was received', data) 
 });
 
 const App: () => React$Node = () => {
@@ -72,7 +78,12 @@ const App: () => React$Node = () => {
                 <View style={{flex:1}} >
                   <Button
                     onPress={() => {
-                      let data = 'S8002:00:3f000000:3f000000\n';
+                      let packet = new leap.Packet(
+                        'set', 
+                        'control/manual', 
+                        ['FW', 0.2, 0.5]
+                      );
+                      let data = codec.encode(packet);
                       alert(`Sent Forward command \n${data}`);
                       client.write(data);
                     }}
@@ -85,7 +96,12 @@ const App: () => React$Node = () => {
                 <View style={{flex:1}} >
                   <Button
                     onPress={() => {
-                      let data = 'S8002:02:3f000000:3f000000\n';
+                      let packet = new leap.Packet(
+                        'set', 
+                        'control/manual', 
+                        ['LT', 0.2, 0.5]
+                      );
+                      let data = codec.encode(packet);
                       alert(`Sent Left command \n${data}`);
                       client.write(data)
                     }}
@@ -96,7 +112,12 @@ const App: () => React$Node = () => {
                 <View style={{flex:1}} >
                   <Button
                     onPress={() => {
-                      let data = 'S8002:03:3f000000:3f000000\n';
+                      let packet = new leap.Packet(
+                        'set', 
+                        'control/manual', 
+                        ['RT', 0.2, 0.5]
+                      );
+                      let data = codec.encode(packet);
                       alert(`Sent Right command \n${data}`);
                       client.write(data)
                     }}
@@ -109,7 +130,12 @@ const App: () => React$Node = () => {
                 <View style={{flex:1}} >
                   <Button
                     onPress={() => {
-                      let data = 'S8002:01:3f000000:3f000000\n';
+                      let packet = new leap.Packet(
+                        'set', 
+                        'control/manual', 
+                        ['BW', 0.2, 0.5]
+                      );
+                      let data = codec.encode(packet);
                       alert(`Sent Reverse command \n${data}`);
                       client.write(data)
                     }}
