@@ -18,6 +18,7 @@ import {
   Button,
 } from 'react-native';
 
+
 import Image from 'react-native-scalable-image';
 
 import AreaChartExample from './src/charts/AreaChartExample';
@@ -25,36 +26,60 @@ import ProgressCircleExample from './src/charts/ProgressCircleExample';
 
 import {
   Colors,
-} from 'react-native/Libraries/NewAppScreen'; 
+} from 'react-native/Libraries/NewAppScreen';
+
+import { createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
 
 const net = require('react-native-tcp-socket').default;
+import reducer from './reducer';
 const leap = require('leap-protocol');
 
-import data from './protocol.json';
+import leap_config from './protocol.json';
 
-const client = net.createConnection({port: 11337, host: '192.168.1.13' });
+const client = net.createConnection({port: 11337, host: 'localhost', localAddress: 'localhost'});
+let leap_bytes = "";
 
-const codec = new leap.Codec(data);
-console.log(codec);
- 
+const store = createStore(reducer);
+
+const codec = new leap.Codec(leap_config);
+if (codec.valid()) {
+  console.log("Codec loaded");
+}
+
 client.on('error', function(error) {
-  console.log(error)
+  console.log("TCP ERROR: ", error)
 });
- 
+
 client.on('data', function(data) {
-  //console.log('message was received', data) 
+  leap_bytes += data;
+  [leap_bytes, packets] = codec.decode(leap_bytes);
+  for (packet of packets) {
+    if ("imu" === packet.paths[0]) {
+      unpacked = codec.unpack(packet);
+      for (key of Object.keys(unpacked)) {
+        store.dispatch({
+          type: 'new_data',
+          key: key,
+          value: unpacked[key]
+        });
+      }
+    }
+  }
 });
+
+
 
 const App: () => React$Node = () => {
 
   return (
-    <>
+    <Provider store={store}>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          
+
           {global.HermesInternal == null ? null : (
             <View style={styles.engine}>
               <Text style={styles.footer}>Engine: Hermes</Text>
@@ -65,7 +90,7 @@ const App: () => React$Node = () => {
               <Image
                 resizeMode="center"
                 width={Dimensions.get('window').width}
-                source={require("./images/autodesk.png")} 
+                source={require("./images/autodesk.png")}
               />
             </View>
             <View style={styles.sectionContainer}>
@@ -74,7 +99,7 @@ const App: () => React$Node = () => {
                 Manual Control
               </Text>
             </View>
-          
+
             <View style={{flex:1, flexDirection:'row'}}>
               <View style={{flex:10, flexDirection:'column'}}>
                 <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
@@ -83,8 +108,8 @@ const App: () => React$Node = () => {
                     <Button
                       onPress={() => {
                         let packet = new leap.Packet(
-                          'set', 
-                          'control/manual', 
+                          'set',
+                          'control/manual',
                           ['FW', 0.2, 0.5]
                         );
                         let data = codec.encode(packet);
@@ -101,8 +126,8 @@ const App: () => React$Node = () => {
                     <Button
                       onPress={() => {
                         let packet = new leap.Packet(
-                          'set', 
-                          'control/manual', 
+                          'set',
+                          'control/manual',
                           ['LT', 0.2, 0.5]
                         );
                         let data = codec.encode(packet);
@@ -117,8 +142,8 @@ const App: () => React$Node = () => {
                     <Button
                       onPress={() => {
                         let packet = new leap.Packet(
-                          'set', 
-                          'control/manual', 
+                          'set',
+                          'control/manual',
                           ['RT', 0.2, 0.5]
                         );
                         let data = codec.encode(packet);
@@ -135,8 +160,8 @@ const App: () => React$Node = () => {
                     <Button
                       onPress={() => {
                         let packet = new leap.Packet(
-                          'set', 
-                          'control/manual', 
+                          'set',
+                          'control/manual',
                           ['BW', 0.2, 0.5]
                         );
                         let data = codec.encode(packet);
@@ -161,7 +186,7 @@ const App: () => React$Node = () => {
           </View>
         </ScrollView>
       </SafeAreaView>
-    </>
+    </Provider>
   );
 };
 
