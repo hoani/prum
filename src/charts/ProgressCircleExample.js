@@ -1,18 +1,38 @@
 import React from 'react'
-import { ProgressCircle }  from 'react-native-svg-charts'
- 
-export default class ProgressCircleExample extends React.PureComponent {
- 
+import { ProgressCircle }  from 'react-native-svg-charts';
+
+
+import { connect } from 'react-redux';
+
+import { newData } from '../../reducer';
+
+class ProgressCircleExample extends React.PureComponent {
+
     render() {
- 
+        let { value } = this.props;
+        value += 0.5
+
         return (
             <ProgressCircle
                 style={ { height: 120 } }
-                progress={ 0.8 }
+                progress={ value }
                 strokeWidth={10}
                 progressColor={'rgb(134, 65, 244)'}
             />
         )
     }
- 
+
 }
+
+const mapStateToProps = state => {
+    let storedData = state.current_data;
+    return {
+        value: storedData["imu/accel/x"],
+    };
+};
+
+const mapDispatchToProps = {
+    newData
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProgressCircleExample);

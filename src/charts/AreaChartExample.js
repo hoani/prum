@@ -7,13 +7,12 @@ import { connect } from 'react-redux';
 import { newData } from '../../reducer';
 
 class AreaChartExample extends React.PureComponent {
+    static defaultProps = {
+        x: [],
+        y: [],
+        z: [],
+      };
 
-    // constructor() {
-    //     super();
-    //     this.state = {
-    //         data: [ 50, 30, -10, 20, 40, 95, -10, -4, -24, 0, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
-    //     };
-    // }
 
     componentDidMount(){
         // // Toggle the state every second

@@ -1,6 +1,6 @@
 export const NEW_DATA = 'new_data';
 
-export default function reducer(state = { plot_data: {} }, action) {
+export default function reducer(state = { plot_data: {}, current_data: {} }, action) {
   switch (action.type) {
     case NEW_DATA:
       let new_data;
@@ -15,10 +15,16 @@ export default function reducer(state = { plot_data: {} }, action) {
         new_data.shift(1);
       }
       new_data.push(action.value);
+
+
       return Object.assign({}, state, {
         plot_data: {
           ...state.plot_data,
           [action.key]: new_data
+        },
+        current_data: {
+          ...state.current_data,
+          [action.key]: action.value
         }
       });
 
@@ -28,6 +34,7 @@ export default function reducer(state = { plot_data: {} }, action) {
 }
 
 export function newData(value, key) {
+  console.log('.data')
   return {
     type: NEW_DATA,
     key: key,
