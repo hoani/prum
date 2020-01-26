@@ -16,7 +16,7 @@ class PlotMulti extends React.PureComponent {
     }
 
     render() {
-        let { plot_data, paths, colors, show_x } = this.props;
+        let { plot_data, paths, colors, show_x, yMin, yMax } = this.props;
 
         const Line = ({ line, color }) => (
             <Path
@@ -27,23 +27,19 @@ class PlotMulti extends React.PureComponent {
             />
         );
 
-        let yMin = 0.0;
-        let yMax = 0.0;
-
-        for (path of paths) {
-            yMin = -2;
-            yMax = 2;
-        }
+        const axis_data = plot_data[paths[0]];
 
         return (
             <View style={ { height: 200 } }>
+                <View style={ { height: 120 } }>
                 {
                     paths.map((path, index) => {
                         return (
                             <AreaChart
+                                key={path}
                                 style={ StyleSheet.absoluteFill }
                                 data={ plot_data[path] }
-                                svg={{ fill: colors[index] }}
+                                svg={{ fill: colors[index]+"40" }}
                                 contentInset={ { top: 20, bottom: 20 } }
                                 curve={ shape.curveNatural }
                                 yAccessor={ ({ item }) => item.y }
@@ -51,20 +47,27 @@ class PlotMulti extends React.PureComponent {
                                 yMin = {yMin}
                                 yMax = {yMax}
                             >
+                                {(index === 0) ? (<Grid/>) : <></>}
                                 <Line color={colors[index]}/>
                             </AreaChart>
                         )
                     })
                 }
-                {/* { show_x ? (
-                <XAxis
-                    style={{ marginHorizontal: -10, marginTop: 15}}
-                    data={ plot_data }
-                    yAccessor={ ({ item }) => item.y }
-                    xAccessor={ ({ item }) => item.x }
-                    formatLabel={ (value, index) => (Math.round(value * 10) % 20 === 0) ? (Math.round(value * 100) / 100).toFixed(1): null }
-                    contentInset={{ left: 25, right: 25 }}
-                />) : (<></>) } */}
+                </View>
+                <View>  
+                    { (show_x && axis_data.length > 0) ? (
+                    <XAxis
+                        style={{ marginHorizontal: -10, marginTop: 15}}
+                        data={ axis_data }
+                        yAccessor={ ({ item }) => item.y }
+                        xAccessor={ ({ item }) => item.x }
+                        formatLabel={ (value, index) => (Math.round(value * 10) % 20 === 0) ? (Math.round(value * 100) / 100).toFixed(1): null }
+                        contentInset={{ left: 25, right: 25 }}
+                        svg = {{fontSize:16, fill:'grey'}}
+                    />) : 
+                    <></> 
+                    }
+                </View>
             </View>
         )
     }
@@ -73,6 +76,11 @@ class PlotMulti extends React.PureComponent {
 mapStateToProps = (state, ownProps) => {
     let storedData = state.plot_data;
     let plot_data = {};
+
+    let yMax = null;
+    let yMin = null;
+
+    let yData = [];
 
     if (ownProps.colors.length !== ownProps.paths.length) {
         for (i in ownProps.paths) {
@@ -83,15 +91,29 @@ mapStateToProps = (state, ownProps) => {
     for (path of ownProps.paths) {
         if (path in storedData) {
             plot_data[path] = storedData[path];
+            
+            const yValues = plot_data[path].map(item => item.y);
+            yData = yData.concat(yValues);
         }
         else {
             plot_data[path] = [{x: 0, y: 0}];
         }
     }
 
+    if (yData.length == 0) {
+        yMin = 0.0;
+        yMax = 0.0;
+    }
+    else {
+        yMax = Math.max(...yData);
+        yMin = Math.min(...yData);
+    }
+
     return {
         ...ownProps,
-        plot_data: plot_data,
+        yMax,
+        yMin,
+        plot_data,
     };
 };
 

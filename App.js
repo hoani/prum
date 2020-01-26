@@ -38,7 +38,8 @@ const leap = require('leap-protocol');
 
 import leap_config from './protocol.json';
 
-const client = net.createConnection({port: 11337, host: 'localhost', localAddress: 'localhost'});
+//const client = net.createConnection({port: 11337, host: 'localhost', localAddress: 'localhost'});
+const client = net.createConnection({port: 11337, host: '192.168.1.13'});
 let leap_bytes = "";
 
 const store = createStore(reducer);
@@ -181,7 +182,7 @@ const App: () => React$Node = () => {
             </View>
             <View style={{flex:3}}>
               <PlotSingle path = "imu/gyros/x" show_x = {false} />
-              <PlotMulti paths = {["imu/gyros/y", "imu/gyros/z"]} colors = {['blueviolet', 'crimson']}/>
+              <PlotMulti paths = {["imu/gyros/y", "imu/gyros/z"]} colors = {['#8a2be2', '#ff1493']}/>
             </View>
           </View>
         </ScrollView>

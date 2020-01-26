@@ -48,12 +48,13 @@ class PlotSingle extends React.PureComponent {
                 </AreaChart>
                 { show_x ? (
                 <XAxis
-                    style={{ marginHorizontal: -10, marginTop: 15}}
+                    style={{ marginHorizontal: -10}}
                     data={ plot_data }
                     yAccessor={ ({ item }) => item.y }
                     xAccessor={ ({ item }) => item.x }
                     formatLabel={ (value, index) => (Math.round(value * 10) % 20 === 0) ? (Math.round(value * 100) / 100).toFixed(1): null }
                     contentInset={{ left: 25, right: 25 }}
+                    svg = {{fontSize:10, fill:'grey'}}
                 />) : (<></>) }
             </View>
         )
