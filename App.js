@@ -21,8 +21,8 @@ import {
 
 import Image from 'react-native-scalable-image';
 
-import AreaChartExample from './src/charts/AreaChartExample';
-import ProgressCircleExample from './src/charts/ProgressCircleExample';
+import PlotSingle from './src/charts/PlotSingle';
+import ProgressCircleValue from './src/charts/ProgressCircleValue';
 
 import {
   Colors,
@@ -55,15 +55,13 @@ client.on('data', function(data) {
   leap_bytes += data;
   [leap_bytes, packets] = codec.decode(leap_bytes);
   for (packet of packets) {
-    if ("imu" === packet.paths[0]) {
-      unpacked = codec.unpack(packet);
-      for (key of Object.keys(unpacked)) {
-        store.dispatch({
-          type: 'new_data',
-          key: key,
-          value: unpacked[key]
-        });
-      }
+    unpacked = codec.unpack(packet);
+    for (key of Object.keys(unpacked)) {
+      store.dispatch({
+        type: 'new_data',
+        key: key,
+        value: unpacked[key]
+      });
     }
   }
 });
@@ -176,12 +174,13 @@ const App: () => React$Node = () => {
               </View>
               <View style={{flex:1}} />
               <View style={{flex:3}} >
-                <ProgressCircleExample />
+                <ProgressCircleValue path="health/os/cpuse" multiplier={0.01} />
               </View>
               <View style={{flex:1}} />
             </View>
             <View style={{flex:3}}>
-              <AreaChartExample></AreaChartExample>
+              <PlotSingle path = "imu/gyros/x" show_x = {false} />
+              <PlotSingle path = "imu/gyros/y" />
             </View>
           </View>
         </ScrollView>

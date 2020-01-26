@@ -1,10 +1,14 @@
-import React from 'react'
-import { AreaChart, Grid } from 'react-native-svg-charts'
-import * as shape from 'd3-shape'
+import React from 'react';
+import { View } from 'react-native';
+import { Path } from 'react-native-svg';
+
+import { AreaChart, Grid, XAxis } from 'react-native-svg-charts';
+import * as shape from 'd3-shape';
 
 import { connect } from 'react-redux';
 
 import { newData } from '../../reducer';
+import PlotSingle from './PlotSingle';
 
 class AreaChartExample extends React.PureComponent {
     static defaultProps = {
@@ -12,6 +16,8 @@ class AreaChartExample extends React.PureComponent {
         y: [],
         z: [],
       };
+
+
 
 
     componentDidMount(){
@@ -36,34 +42,66 @@ class AreaChartExample extends React.PureComponent {
     render() {
         let { x, y, z } = this.props;
 
+        const Line = ({ line }) => (
+            <Path
+                key={'line'}
+                d={line}
+                stroke={'rgb(134, 65, 244)'}
+                fill={'none'}
+            />
+        );
+
+        const colors = [ 'rgb(138, 0, 230, 0.8)', 'rgb(173, 51, 255, 0.8)', 'rgb(194, 102, 255, 0.8)', 'rgb(214, 153, 255, 0.8)' ]
+        const keys   = [ 'apples', 'bananas', 'cherries', 'dates' ]
+
         return (
             <>
+            <View>
+            <PlotSingle path = "imu/gyros/y" />
             <AreaChart
                 style={{ height: 120 }}
                 data={ x }
-                contentInset={{ top: 10, bottom: 10 }}
-                curve={ shape.curveNatural }
-                svg={{ fill: 'rgba(134, 65, 244, 0.8)' }}
+                contentInset={{ top: 10, bottom: 0 }}
+                curve={ shape.curveLinear }
+                svg={{ fill: 'rgba(134, 65, 244, 0.2)' }}
+                yAccessor={ ({ item }) => item.y }
+                xAccessor={ ({ item }) => item.x }
             >
                 <Grid/>
+                <Line/>
             </AreaChart>
+            <XAxis
+                style={{ marginHorizontal: -10, marginTop: 15}}
+                data={ x }
+                yAccessor={ ({ item }) => item.y }
+                xAccessor={ ({ item }) => item.x }
+                formatLabel={ (value, index) => (Math.round(value * 10) % 20 === 0) ? (Math.round(value * 100) / 100).toFixed(1): null }
+                contentInset={{ left: 25, right: 25 }}
+            />
+        </View>
             <AreaChart
                 style={{ height: 120 }}
                 data={ y }
                 contentInset={{ top: 10, bottom: 10 }}
                 curve={ shape.curveNatural }
-                svg={{ fill: 'rgba(134, 65, 244, 0.8)' }}
+                svg={{ fill: 'rgba(134, 65, 244, 0.2)' }}
+                yAccessor={ ({ item }) => item.y }
+                xAccessor={ ({ item }) => item.x }
             >
                 <Grid/>
+                <Line/>
             </AreaChart>
             <AreaChart
                 style={{ height: 120 }}
                 data={ z }
                 contentInset={{ top: 10, bottom: 10 }}
-                curve={ shape.curveNatural }
-                svg={{ fill: 'rgba(134, 65, 244, 0.8)' }}
+                curve={ shape.curveLinear }
+                svg={{ fill: 'rgba(134, 65, 244, 0.2)' }}
+                yAccessor={ ({ item }) => item.y }
+                xAccessor={ ({ item }) => item.x }
             >
                 <Grid/>
+                <Line/>
             </AreaChart>
             </>
         )

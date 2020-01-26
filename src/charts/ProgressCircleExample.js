@@ -27,7 +27,7 @@ class ProgressCircleExample extends React.PureComponent {
 const mapStateToProps = state => {
     let storedData = state.current_data;
     return {
-        value: storedData["imu/accel/x"],
+        value: storedData["health/os/cpuse"],
     };
 };
 
