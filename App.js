@@ -22,6 +22,7 @@ import {
 import Image from 'react-native-scalable-image';
 
 import PlotSingle from './src/charts/PlotSingle';
+import PlotMulti from './src/charts/PlotMulti';
 import ProgressCircleValue from './src/charts/ProgressCircleValue';
 
 import {
@@ -180,7 +181,7 @@ const App: () => React$Node = () => {
             </View>
             <View style={{flex:3}}>
               <PlotSingle path = "imu/gyros/x" show_x = {false} />
-              <PlotSingle path = "imu/gyros/y" />
+              <PlotMulti paths = {["imu/gyros/y", "imu/gyros/z"]} colors = {['blueviolet', 'crimson']}/>
             </View>
           </View>
         </ScrollView>
