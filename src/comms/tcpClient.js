@@ -1,30 +1,30 @@
-
-const net = require('react-native-tcp-socket').default;
-const leap = require('leap-protocol');
+import tcpSockets from 'react-native-tcp-socket';
+import Packet from 'leap-protocol';
 
 export default class TcpClient {
-  constructor(port = 11337, host, codec) {
+  constructor(port = 11337, host, codec, store) {
     this.port = port;
     this.host = host;
     this.client = null;
     this.codec = codec;
     this.bytes = "";
+    this.store = store;
   }
 
-  connect() {
-    this.client = net.createConnection({port: 11337, host: '192.168.1.13'});
-    this.client.on('data', this.data); 
-    this.client.on('error', this.error); 
+  connect(options) {
+    this.client = tcpSockets.createConnection({...options, port: this.port, host: this.host});
+    this.client.on('data', this.data.bind(this));
+    this.client.on('error', this.error.bind(this));
     return (this.client !== null);
   }
-  
+
   disconnect() {
     this.client.destroy();
     this.client = null;
   }
 
   send(packets) {
-    if (packets instanceof leap.Packet) {
+    if (packets instanceof Packet) {
       packets = [packets];
     }
     let data = "";
@@ -36,11 +36,11 @@ export default class TcpClient {
 
   data(data) {
     this.bytes += data;
-    [this.bytes, packets] = codec.decode(this.bytes);
+    [this.bytes, packets] = this.codec.decode(this.bytes);
     for (packet of packets) {
-      unpacked = codec.unpack(packet);
+      const unpacked = this.codec.unpack(packet);
       for (key of Object.keys(unpacked)) {
-        store.dispatch({
+        this.store.dispatch({
           type: 'new_data',
           key: key,
           value: unpacked[key]
@@ -49,7 +49,7 @@ export default class TcpClient {
     }
   }
 
-  handleError() {
+  error(error) {
     console.log("TCP ERROR: ", error);
     this.disconnect();
   }

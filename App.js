@@ -32,43 +32,21 @@ import {
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
-const net = require('react-native-tcp-socket').default;
+import TcpClient from './src/comms/tcpClient';
 import reducer from './reducer';
-const leap = require('leap-protocol');
+import {Codec, Packet} from 'leap-protocol';
 
 import leap_config from './protocol.json';
 
-//const client = net.createConnection({port: 11337, host: 'localhost', localAddress: 'localhost'});
-const client = net.createConnection({port: 11337, host: '192.168.1.13'});
-let leap_bytes = "";
-
 const store = createStore(reducer);
 
-const codec = new leap.Codec(leap_config);
+const codec = new Codec(leap_config);
 if (codec.valid()) {
   console.log("Codec loaded");
 }
 
-client.on('error', function(error) {
-  console.log("TCP ERROR: ", error)
-});
-
-client.on('data', function(data) {
-  leap_bytes += data;
-  [leap_bytes, packets] = codec.decode(leap_bytes);
-  for (packet of packets) {
-    unpacked = codec.unpack(packet);
-    for (key of Object.keys(unpacked)) {
-      store.dispatch({
-        type: 'new_data',
-        key: key,
-        value: unpacked[key]
-      });
-    }
-  }
-});
-
-
+const client = new TcpClient(11337, 'localhost', codec, store);
+client.connect({localAddress: 'localhost'});
 
 const App: () => React$Node = () => {
 
@@ -113,14 +91,12 @@ const App: () => React$Node = () => {
                   <View style={{flex:1}} >
                     <Button
                       onPress={() => {
-                        let packet = new leap.Packet(
+                        let packet = new Packet(
                           'set',
                           'control/manual',
                           ['FW', 0.2, 0.5]
                         );
-                        let data = codec.encode(packet);
-                        alert(`Sent Forward command \n${data}`);
-                        client.write(data);
+                        client.send(packet);
                       }}
                       title="Forward"
                     />
@@ -131,14 +107,12 @@ const App: () => React$Node = () => {
                   <View style={{flex:1}} >
                     <Button
                       onPress={() => {
-                        let packet = new leap.Packet(
+                        let packet = new Packet(
                           'set',
                           'control/manual',
                           ['LT', 0.2, 0.5]
                         );
-                        let data = codec.encode(packet);
-                        alert(`Sent Left command \n${data}`);
-                        client.write(data)
+                        client.send(packet);
                       }}
                       title="Left"
                     />
@@ -147,14 +121,12 @@ const App: () => React$Node = () => {
                   <View style={{flex:1}} >
                     <Button
                       onPress={() => {
-                        let packet = new leap.Packet(
+                        let packet = new Packet(
                           'set',
                           'control/manual',
                           ['RT', 0.2, 0.5]
                         );
-                        let data = codec.encode(packet);
-                        alert(`Sent Right command \n${data}`);
-                        client.write(data)
+                        client.send(packet);
                       }}
                       title="RIGHT"
                     />
@@ -165,14 +137,12 @@ const App: () => React$Node = () => {
                   <View style={{flex:1}} >
                     <Button
                       onPress={() => {
-                        let packet = new leap.Packet(
+                        let packet = new Packet(
                           'set',
                           'control/manual',
                           ['BW', 0.2, 0.5]
                         );
-                        let data = codec.encode(packet);
-                        alert(`Sent Reverse command \n${data}`);
-                        client.write(data)
+                        client.send(packet);
                       }}
                       title="Reverse"
                     />
