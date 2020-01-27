@@ -1,0 +1,30 @@
+[] Enable faster UI Testing
+  [] Extract comms from app.js
+  [] Make fake robot data simulator
+[] Structure
+  [] Move reducer into src 
+  [] Move comms into src
+[] UI Element: Battery Indicator
+  [] Check out 
+    https://react-native-elements.github.io/react-native-elements/docs/1.1.0/icon.html
+    https://fontawesome.com/icons?d=gallery&q=plug
+    https://fontawesome.com/icons?d=gallery&q=battery
+  [] Determine a design:
+    [] Battery and plug seperate?
+    [] Plug replaces battery when plugged in?
+    [] ALways battery unless battery is not connected, then plug?
+[] UI Layout
+  [] Checkout https://facebook.github.io/react-native/docs/navigation
+  [] Decide on navigation scheme. Want:
+    - landing page, pref connection page?
+    - One page per GUI, navigation by swiping left/right
+    - Some key elements which stick to all pages (health, connection, etc)
+  [] Determine next steps
+[] Plotting
+  [] Default colors for multi plots
+  [] Turn plot single into a specialized multiplot
+  [] Create plot3DOF as a specialized multiplot
+  [] Consider the 1, 1.5, 2, 3, 5, 8 scaling strategy
+[] Other things
+  [] Add leetware logo
+

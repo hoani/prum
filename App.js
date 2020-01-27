@@ -72,6 +72,12 @@ client.on('data', function(data) {
 
 const App: () => React$Node = () => {
 
+  handleAppStateChange = (nextAppState) => {
+    if (nextAppState === 'inactive') {
+      client.destroy();
+    }
+  }
+
   return (
     <Provider store={store}>
       <StatusBar barStyle="dark-content" />
