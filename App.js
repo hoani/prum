@@ -18,6 +18,9 @@ import {
   Button,
 } from 'react-native';
 
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
+
 
 import Image from 'react-native-scalable-image';
 
@@ -48,14 +51,15 @@ if (codec.valid()) {
 
 const client = new Client(11337, 'localhost', codec, store);
 
-const App: () => React$Node = () => {
 
+class HomeScreen extends React.Component {
   handleAppStateChange = (nextAppState) => {
     if (nextAppState === 'inactive') {
-      client.destroy();
+      client.disconnect();
     }
   }
 
+  render() {
   return (
     <Provider store={store}>
       <StatusBar barStyle="dark-content" />
@@ -172,6 +176,7 @@ const App: () => React$Node = () => {
       </SafeAreaView>
     </Provider>
   );
+                    }
 };
 
 const styles = StyleSheet.create({
@@ -212,5 +217,12 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
 });
+
+const MainNavigator = createStackNavigator({
+  Home: {screen: HomeScreen},
+  // Profile: {screen: ProfileScreen},
+});
+
+const App = createAppContainer(MainNavigator);
 
 export default App;
