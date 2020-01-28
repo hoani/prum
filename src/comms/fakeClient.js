@@ -1,11 +1,26 @@
 export default class Client {
   constructor(port = 11337, host, codec, store) {
     this.interval = null;
-    this.client = null;
-    this.codec = codec;
-    this.bytes = "";
-    this.store = store;
     this.items = {};
+    this.store = store;
+
+    this.addItem('imu/accel/x', [1.0], 1.0);
+    this.addItem('imu/accel/y', [-1.0], 1.2);
+    this.addItem('imu/accel/z', [9.82], 0.9);
+    
+    this.addItem('imu/gyros/x', [0.4], 0.3);
+    this.addItem('imu/gyros/y', [-0.7], 0.5);
+    this.addItem('imu/gyros/z', [0.2], 0.45);
+
+    this.addItem('imu/magne/x', [26.3], 4.5);
+    this.addItem('imu/magne/y', [-37.1], 3.4);
+    this.addItem('imu/magne/z', [-20.8], 5.7);
+    
+    this.addItem('ahrs/angles/pitch', [70.0], 5.0);
+    this.addItem('ahrs/angles/yaw', [0.0], 2.0);
+
+    this.addItem('health/os/cpuse', [40.0], 15.0);
+    this.addItem('health/batt/v', [7.6], 0.4);
   }
 
   addItem(key, profile, noise) {
@@ -13,7 +28,7 @@ export default class Client {
   }
 
   connect(options) {
-    this.interval = setInterval(newData, ms = 200);
+    this.interval = setInterval(() => this.newData(), ms = 200);
     return (true);
   }
 
@@ -31,7 +46,7 @@ export default class Client {
     for (key of Object.keys(this.items)) {
       const item = this.items[key];
       const base = item.profile[item.i];
-      const noise = 0;
+      const noise = item.noise * (2.0 * Math.random() - 1.0);
       item.i++;
       if (item.i >= item.profile.length) {
         item.i = 0;

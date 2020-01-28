@@ -1,6 +1,6 @@
-[] Enable faster UI Testing
+[X] Enable faster UI Testing
   [X] Extract comms from app.js
-  [] Make fake robot data simulator
+  [X] Make fake robot data simulator
 [] Structure
   [] Move reducer into src
   [X] Move comms into src
