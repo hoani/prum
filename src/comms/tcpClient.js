@@ -1,7 +1,7 @@
 import tcpSockets from 'react-native-tcp-socket';
 import Packet from 'leap-protocol';
 
-export default class TcpClient {
+export default class Client {
   constructor(port = 11337, host, codec, store) {
     this.port = port;
     this.host = host;

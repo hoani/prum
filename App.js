@@ -32,7 +32,7 @@ import {
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
-import TcpClient from './src/comms/tcpClient';
+import Client from './src/comms/tcpClient';
 import reducer from './reducer';
 import {Codec, Packet} from 'leap-protocol';
 
@@ -45,7 +45,7 @@ if (codec.valid()) {
   console.log("Codec loaded");
 }
 
-const client = new TcpClient(11337, 'localhost', codec, store);
+const client = new Client(11337, 'localhost', codec, store);
 client.connect({localAddress: 'localhost'});
 
 const App: () => React$Node = () => {
