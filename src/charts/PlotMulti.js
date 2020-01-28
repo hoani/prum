@@ -7,7 +7,7 @@ import * as shape from 'd3-shape';
 
 import { connect } from 'react-redux';
 
-import { newData } from '../../reducer';
+import { newData } from '../state/reducer';
 
 class PlotMulti extends React.PureComponent {
 
@@ -39,8 +39,8 @@ class PlotMulti extends React.PureComponent {
                                 key={path}
                                 style={ StyleSheet.absoluteFill }
                                 data={ plot_data[path] }
-                                svg={{ fill: colors[index]+"40" }}
-                                contentInset={ { top: 20, bottom: 20 } }
+                                svg={{ fill: colors[index]+"10" }}
+                                contentInset={ { top: 10, bottom: 10 } }
                                 curve={ shape.curveNatural }
                                 yAccessor={ ({ item }) => item.y }
                                 xAccessor={ ({ item }) => item.x }
@@ -57,7 +57,7 @@ class PlotMulti extends React.PureComponent {
                 <View>  
                     { (show_x && axis_data.length > 0) ? (
                     <XAxis
-                        style={{ marginHorizontal: -10, marginTop: 15}}
+                        style={{ marginHorizontal: -10, marginTop: 5}}
                         data={ axis_data }
                         yAccessor={ ({ item }) => item.y }
                         xAccessor={ ({ item }) => item.x }
@@ -73,6 +73,19 @@ class PlotMulti extends React.PureComponent {
     }
 }
 
+const DEFAULT_COLORS = [
+    '#008b8b',
+    '#1e90ff',
+    '#dc143c',
+    '#ff8c00',
+    '#a9a9a9',
+    '#8a2be2',
+    '#ff1493',
+    '#daa520',
+    '#4b0082',
+    '#ee82ee'
+];
+
 mapStateToProps = (state, ownProps) => {
     let storedData = state.plot_data;
     let plot_data = {};
@@ -84,7 +97,8 @@ mapStateToProps = (state, ownProps) => {
 
     if (ownProps.colors.length !== ownProps.paths.length) {
         for (i in ownProps.paths) {
-            ownProps.colors.push('rgba(134, 28, 176, 0.5)');
+            const color = DEFAULT_COLORS[i % DEFAULT_COLORS.length];
+            ownProps.colors.push(color);
         }
     }
 

@@ -34,7 +34,7 @@ import { Provider, connect } from 'react-redux';
 
 //import Client from './src/comms/tcpClient';
 import Client from './src/comms/fakeClient';
-import reducer from './reducer';
+import reducer from './src/state/reducer';
 import {Codec, Packet} from 'leap-protocol';
 
 import leap_config from './protocol.json';
@@ -165,6 +165,7 @@ const App: () => React$Node = () => {
             <View style={{flex:3}}>
               <PlotSingle path = "imu/gyros/x" show_x = {false} />
               <PlotMulti paths = {["imu/gyros/y", "imu/gyros/z"]} colors = {['#8a2be2', '#ff1493']}/>
+              <PlotMulti paths = {["imu/accel/x", "imu/accel/y","imu/accel/z"]} />
             </View>
           </View>
         </ScrollView>

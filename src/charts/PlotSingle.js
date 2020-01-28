@@ -7,7 +7,7 @@ import * as shape from 'd3-shape';
 
 import { connect } from 'react-redux';
 
-import { newData } from '../../reducer';
+import { newData } from '../state/reducer';
 
 class PlotSingle extends React.PureComponent {
     static defaultProps = {

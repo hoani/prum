@@ -6,7 +6,7 @@ import { Text } from 'react-native-svg'
 
 import { connect } from 'react-redux';
 
-import { newData } from '../../reducer';
+import { newData } from '../state/reducer';
 
 class ProgressCircleValue extends React.PureComponent {
     static defaultProps = {
