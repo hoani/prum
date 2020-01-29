@@ -1,126 +1,155 @@
+import React from 'react';
+import {
+  Dimensions,
+  SafeAreaView,
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  StatusBar,
+  Button,
+} from 'react-native';
+
+import Image from 'react-native-scalable-image';
+
+import PlotSingle from '../charts/PlotSingle';
+import PlotMulti from '../charts/PlotMulti';
+import ProgressCircleValue from '../charts/ProgressCircleValue';
+
+import {
+  Colors,
+} from 'react-native/Libraries/NewAppScreen';
+
+import {Packet} from 'leap-protocol';
+import {AppContext} from '../state/appContext';
+
+
 export default class ManualScreen extends React.Component {
   static navigationOptions = {
     title: 'Manual Control',
   };
   render() {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
+    let client = this.context.client;
+    return (
+      <>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView>
+          <ScrollView
+            contentInsetAdjustmentBehavior="automatic"
+            style={styles.scrollView}>
 
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={{justifyContent:'center', alignItems:'center'}}>
-              <Image
-                resizeMode="center"
-                width={Dimensions.get('window').width}
-                source={require("./images/autodesk.png")}
-              />
-            </View>
-            <View style={styles.sectionContainer}>
-              <Button
-                onPress={() => {
-                  client.connect({localAddress: 'localhost'});
-                }}
-                title="Connect"
-              />
-              <Text style={styles.sectionTitle}>Hoani's Robot Control</Text>
-              <Text style={styles.sectionDescription}>
-                Manual Control
-              </Text>
-            </View>
+            {global.HermesInternal == null ? null : (
+              <View style={styles.engine}>
+                <Text style={styles.footer}>Engine: Hermes</Text>
+              </View>
+            )}
+            <View style={styles.body}>
+              <View style={{justifyContent:'center', alignItems:'center'}}>
+                <Image
+                  resizeMode="center"
+                  width={Dimensions.get('window').width}
+                  source={require("../../images/autodesk.png")}
+                />
+              </View>
+              <View style={styles.sectionContainer}>
+                <Button
+                  onPress={() => {
+                    client.connect({localAddress: 'localhost'});
+                  }}
+                  title="Connect"
+                />
+                <Text style={styles.sectionTitle}>Hoani's Robot Control</Text>
+                <Text style={styles.sectionDescription}>
+                  Manual Control
+                </Text>
+              </View>
 
-            <View style={{flex:1, flexDirection:'row'}}>
-              <View style={{flex:10, flexDirection:'column'}}>
-                <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
-                  <View style={{flex:1, backgroundColor:"#eee"}} />
-                  <View style={{flex:1}} >
-                    <Button
-                      onPress={() => {
-                        let packet = new Packet(
-                          'set',
-                          'control/manual',
-                          ['FW', 0.2, 0.5]
-                        );
-                        client.send(packet);
-                      }}
-                      title="Forward"
-                    />
+              <View style={{flex:1, flexDirection:'row'}}>
+                <View style={{flex:10, flexDirection:'column'}}>
+                  <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
+                    <View style={{flex:1, backgroundColor:"#eee"}} />
+                    <View style={{flex:1}} >
+                      <Button
+                        onPress={() => {
+                          let packet = new Packet(
+                            'set',
+                            'control/manual',
+                            ['FW', 0.2, 0.5]
+                          );
+                          client.send(packet);
+                        }}
+                        title="Forward"
+                      />
+                    </View>
+                    <View style={{flex:1, backgroundColor:"#eee"}} />
                   </View>
-                  <View style={{flex:1, backgroundColor:"#eee"}} />
+                  <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
+                    <View style={{flex:1}} >
+                      <Button
+                        onPress={() => {
+                          let packet = new Packet(
+                            'set',
+                            'control/manual',
+                            ['LT', 0.2, 0.5]
+                          );
+                          client.send(packet);
+                        }}
+                        title="Left"
+                      />
+                    </View>
+                    <View style={{flex:1, backgroundColor:"#eee"}} />
+                    <View style={{flex:1}} >
+                      <Button
+                        onPress={() => {
+                          let packet = new Packet(
+                            'set',
+                            'control/manual',
+                            ['RT', 0.2, 0.5]
+                          );
+                          client.send(packet);
+                        }}
+                        title="RIGHT"
+                      />
+                    </View>
+                  </View>
+                  <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
+                    <View style={{flex:1, backgroundColor:"#eee"}} />
+                    <View style={{flex:1}} >
+                      <Button
+                        onPress={() => {
+                          let packet = new Packet(
+                            'set',
+                            'control/manual',
+                            ['BW', 0.2, 0.5]
+                          );
+                          client.send(packet);
+                        }}
+                        title="Reverse"
+                      />
+                    </View>
+                    <View style={{flex:1, backgroundColor:"#eee"}} />
+                  </View>
                 </View>
-                <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
-                  <View style={{flex:1}} >
-                    <Button
-                      onPress={() => {
-                        let packet = new Packet(
-                          'set',
-                          'control/manual',
-                          ['LT', 0.2, 0.5]
-                        );
-                        client.send(packet);
-                      }}
-                      title="Left"
-                    />
-                  </View>
-                  <View style={{flex:1, backgroundColor:"#eee"}} />
-                  <View style={{flex:1}} >
-                    <Button
-                      onPress={() => {
-                        let packet = new Packet(
-                          'set',
-                          'control/manual',
-                          ['RT', 0.2, 0.5]
-                        );
-                        client.send(packet);
-                      }}
-                      title="RIGHT"
-                    />
-                  </View>
+                <View style={{flex:1}} />
+                <View style={{flex:3}} >
+                  <ProgressCircleValue path="health/os/cpuse" multiplier={0.01} />
                 </View>
-                <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
-                  <View style={{flex:1, backgroundColor:"#eee"}} />
-                  <View style={{flex:1}} >
-                    <Button
-                      onPress={() => {
-                        let packet = new Packet(
-                          'set',
-                          'control/manual',
-                          ['BW', 0.2, 0.5]
-                        );
-                        client.send(packet);
-                      }}
-                      title="Reverse"
-                    />
-                  </View>
-                  <View style={{flex:1, backgroundColor:"#eee"}} />
-                </View>
+                <View style={{flex:1}} />
               </View>
-              <View style={{flex:1}} />
-              <View style={{flex:3}} >
-                <ProgressCircleValue path="health/os/cpuse" multiplier={0.01} />
+              <View style={{flex:3}}>
+                <PlotSingle path = "imu/gyros/x" show_x = {false} />
+                <PlotMulti paths = {["imu/gyros/y", "imu/gyros/z"]} colors = {['#8a2be2', '#ff1493']}/>
+                <PlotMulti paths = {["imu/accel/x", "imu/accel/y","imu/accel/z"]} />
               </View>
-              <View style={{flex:1}} />
             </View>
-            <View style={{flex:3}}>
-              <PlotSingle path = "imu/gyros/x" show_x = {false} />
-              <PlotMulti paths = {["imu/gyros/y", "imu/gyros/z"]} colors = {['#8a2be2', '#ff1493']}/>
-              <PlotMulti paths = {["imu/accel/x", "imu/accel/y","imu/accel/z"]} />
-            </View>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+          </ScrollView>
+        </SafeAreaView>
       </>
-  );
-                    }
+    );
+  }
 };
+
+ManualScreen.contextType = AppContext;
 
 const styles = StyleSheet.create({
   scrollView: {
