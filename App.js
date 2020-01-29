@@ -53,15 +53,9 @@ const client = new Client(11337, 'localhost', codec, store);
 
 
 class HomeScreen extends React.Component {
-  handleAppStateChange = (nextAppState) => {
-    if (nextAppState === 'inactive') {
-      client.disconnect();
-    }
-  }
-
   render() {
   return (
-    <Provider store={store}>
+    <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView
@@ -174,7 +168,7 @@ class HomeScreen extends React.Component {
           </View>
         </ScrollView>
       </SafeAreaView>
-    </Provider>
+      </>
   );
                     }
 };
@@ -218,11 +212,29 @@ const styles = StyleSheet.create({
   },
 });
 
-const MainNavigator = createStackNavigator({
-  Home: {screen: HomeScreen},
-  // Profile: {screen: ProfileScreen},
-});
+const MainNavigator = createStackNavigator(
+  {
+    Home: {screen: HomeScreen},
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
 
-const App = createAppContainer(MainNavigator);
+const AppContainer = createAppContainer(MainNavigator);
 
-export default App;
+export default class App extends React.Component {
+  handleAppStateChange = (nextAppState) => {
+    if (nextAppState === 'inactive') {
+      client.disconnect();
+    }
+  }
+
+  render() {
+    return (
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    );
+  }
+}
