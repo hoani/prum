@@ -9,21 +9,22 @@
 import React from 'react';
 
 import {createAppContainer} from 'react-navigation';
-// import { Icon } from 'react-native-elements'
 import {createStackNavigator} from 'react-navigation-stack';
 
 import { createStore } from 'redux';
-import { Provider, connect } from 'react-redux';
+import { Provider} from 'react-redux';
 
 //import Client from './src/comms/tcpClient';
 import Client from './src/comms/fakeClient';
 import reducer from './src/state/reducer';
-import {Codec, Packet} from 'leap-protocol';
+import {Codec} from 'leap-protocol';
 import {AppContext} from './src/state/appContext';
 
 import leap_config from './protocol.json';
 import ManualScreen from './src/screens/manual';
 import ConnectScreen from './src/screens/connect';
+
+import 'react-native-gesture-handler';
 
 const store = createStore(reducer);
 
