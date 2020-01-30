@@ -27,21 +27,25 @@ class PlotMulti extends React.PureComponent {
             />
         );
 
-        const axis_data = plot_data[paths[0]];
+        let axis_data = Array();
+        if (paths.length > 0 && paths[0] in plot_data) {
+            axis_data = plot_data[paths[0]];
+        }
 
         return (
             <View style={ { height: 200 } }>
                 <View style={ { height: 120 } }>
                 {
                     paths.map((path, index) => {
+                        let data = (path in plot_data) ? plot_data[path] : [];
                         return (
                             <AreaChart
                                 key={path}
                                 style={ StyleSheet.absoluteFill }
-                                data={ plot_data[path] }
+                                data={ data }
                                 svg={{ fill: colors[index]+"10" }}
                                 contentInset={ { top: 10, bottom: 10 } }
-                                curve={ shape.curveNatural }
+                                curve={ shape.curveLinear }
                                 yAccessor={ ({ item }) => item.y }
                                 xAccessor={ ({ item }) => item.x }
                                 yMin = {yMin}
@@ -54,7 +58,7 @@ class PlotMulti extends React.PureComponent {
                     })
                 }
                 </View>
-                <View>  
+                <View>
                     { (show_x && axis_data.length > 0) ? (
                     <XAxis
                         style={{ marginHorizontal: -10, marginTop: 5}}
@@ -64,8 +68,8 @@ class PlotMulti extends React.PureComponent {
                         formatLabel={ (value, index) => (Math.round(value * 10) % 20 === 0) ? (Math.round(value * 100) / 100).toFixed(1): null }
                         contentInset={{ left: 25, right: 25 }}
                         svg = {{fontSize:16, fill:'grey'}}
-                    />) : 
-                    <></> 
+                    />) :
+                    <></>
                     }
                 </View>
             </View>
@@ -95,17 +99,23 @@ mapStateToProps = (state, ownProps) => {
 
     let yData = [];
 
+    let update = false;
+
     if (ownProps.colors.length !== ownProps.paths.length) {
+        update = true;
         for (i in ownProps.paths) {
             const color = DEFAULT_COLORS[i % DEFAULT_COLORS.length];
             ownProps.colors.push(color);
         }
     }
 
+
+
     for (path of ownProps.paths) {
         if (path in storedData) {
+            update = true;
             plot_data[path] = storedData[path];
-            
+
             const yValues = plot_data[path].map(item => item.y);
             yData = yData.concat(yValues);
         }
@@ -123,12 +133,15 @@ mapStateToProps = (state, ownProps) => {
         yMin = Math.min(...yData);
     }
 
-    return {
-        ...ownProps,
-        yMax,
-        yMin,
-        plot_data,
-    };
+    if (update) {
+        return {
+            ...ownProps,
+            yMax,
+            yMin,
+            plot_data,
+        };
+    }
+    return ownProps;
 };
 
 const mapDispatchToProps = {

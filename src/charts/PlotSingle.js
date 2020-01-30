@@ -13,7 +13,7 @@ class PlotSingle extends React.PureComponent {
         let { path, show_x } = this.props;
         return (
             <View>
-                <PlotMulti paths = {[path]} show_x = {show_x}/>
+                <PlotMulti paths={[path]} show_x={show_x}/>
             </View>
         );
     }

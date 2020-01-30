@@ -9,6 +9,7 @@
 import React from 'react';
 
 import {createAppContainer} from 'react-navigation';
+// import { Icon } from 'react-native-elements'
 import {createStackNavigator} from 'react-navigation-stack';
 
 import { createStore } from 'redux';
@@ -22,6 +23,7 @@ import {AppContext} from './src/state/appContext';
 
 import leap_config from './protocol.json';
 import ManualScreen from './src/screens/manual';
+import ConnectScreen from './src/screens/connect';
 
 const store = createStore(reducer);
 
@@ -34,10 +36,11 @@ const client = new Client(11337, 'localhost', codec, store);
 
 const MainNavigator = createStackNavigator(
   {
-    Home: {screen: ManualScreen},
+    Connect: {screen: ConnectScreen},
+    Manual: {screen: ManualScreen},
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Connect',
   }
 );
 
@@ -51,6 +54,16 @@ export default class App extends React.Component {
       client.disconnect();
     }
   }
+
+  static navigationOptions = {
+    headerRight: () => (
+      <Button
+        onPress={() => alert('This is a button!')}
+        title="Info"
+        color="#fff"
+      />
+    ),
+  };
 
   render() {
     return (

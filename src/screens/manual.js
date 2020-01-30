@@ -137,7 +137,7 @@ export default class ManualScreen extends React.Component {
                 <View style={{flex:1}} />
               </View>
               <View style={{flex:3}}>
-                <PlotSingle path = "imu/gyros/x" show_x = {false} />
+                {/* <PlotSingle path = "imu/gyros/x" show_x = {false} /> */}
                 <PlotMulti paths = {["imu/gyros/y", "imu/gyros/z"]} colors = {['#8a2be2', '#ff1493']}/>
                 <PlotMulti paths = {["imu/accel/x", "imu/accel/y","imu/accel/z"]} />
               </View>
