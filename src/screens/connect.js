@@ -14,9 +14,32 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
+import { Icon } from 'react-native-elements'
+
 import {AppContext} from '../state/appContext';
 
 export default class ConnectScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Connect',
+    headerRight: () => (
+      <View style={{flex: 1, flexDirection: 'row'}}>
+      <Button
+        onPress={() => alert('This is a button!')}
+        title="Info"
+        color="#333"
+        backgroundColor="#bbb"
+      />
+      <Button
+        onPress={() => alert('This is a button!')}
+        title="Info"
+        color="#333"
+        backgroundColor="#bbb"
+      />
+      <Icon
+  name='rowing' />
+      </View>
+    ),
+  };
   render() {
     let client = this.context.client;
     return (
