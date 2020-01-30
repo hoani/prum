@@ -26,7 +26,7 @@ import {Packet} from 'leap-protocol';
 import {AppContext} from '../state/appContext';
 
 
-export default class ManualScreen extends React.Component {
+export default class PlaygroundScreen extends React.Component {
   static navigationOptions = {
     title: 'Manual Control',
   };
@@ -171,7 +171,7 @@ export default class ManualScreen extends React.Component {
   }
 };
 
-ManualScreen.contextType = AppContext;
+PlaygroundScreen.contextType = AppContext;
 
 const styles = StyleSheet.create({
   scrollView: {

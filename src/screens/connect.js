@@ -7,14 +7,14 @@ import {
   View,
   Text,
   StatusBar,
-  Button,
 } from 'react-native';
 
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-import { Icon } from 'react-native-elements'
+import { Icon, Button } from 'react-native-elements';
+
 
 import {AppContext} from '../state/appContext';
 
@@ -35,6 +35,11 @@ export default class ConnectScreen extends React.Component {
         color="#333"
         backgroundColor="#bbb"
       />
+      <Icon
+        name='heartbeat'
+        type='font-awesome'
+        color='#f50'
+        onPress={() => console.log('hello')} />
       <Icon
   name='rowing' />
       </View>
@@ -65,6 +70,19 @@ export default class ConnectScreen extends React.Component {
                     this.props.navigation.navigate('Manual');
                   }}
                   title="Connect"
+                />
+                <Text style={styles.sectionDescription}>
+                  Interfaces:
+                </Text>
+                <Button
+                  icon={{
+                      name:'stop-circle',
+                      type:'font-awesome',
+                      color:'#fff',
+                      position: 'absolute',
+                      left: 2,
+                  }}
+                  title="Button with icon component"
                 />
               </View>
             </View>

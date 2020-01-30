@@ -21,8 +21,9 @@ import {Codec} from 'leap-protocol';
 import {AppContext} from './src/state/appContext';
 
 import leap_config from './protocol.json';
-import ManualScreen from './src/screens/manual';
 import ConnectScreen from './src/screens/connect';
+import ManualScreen from './src/screens/manual';
+import PlaygroundScreen from './src/screens/playground';
 
 import 'react-native-gesture-handler';
 
@@ -39,6 +40,7 @@ const MainNavigator = createStackNavigator(
   {
     Connect: {screen: ConnectScreen},
     Manual: {screen: ManualScreen},
+    Playground: {screen: PlaygroundScreen}
   },
   {
     initialRouteName: 'Connect',
