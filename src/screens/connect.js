@@ -7,6 +7,7 @@ import {
   View,
   Text,
   StatusBar,
+  FlatList,
 } from 'react-native';
 
 import {
@@ -60,34 +61,78 @@ export default class ConnectScreen extends React.Component {
             <View style={styles.body}>
               <View style={styles.sectionContainer}>
                 <Text style={styles.sectionDescription}>
-                  Connect
+                  Connect Wifi
                 </Text>
                 <TextInput
                   style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
                   value='192.168.1.13'
                 />
-                <Button
+                <IconButton
+                  style={{paddingTop:12}}
+                  iconName="wifi"
+                  iconType="font-awesome"
+                  iconColor="#fff"
+                  title="Connect Wifi"
                   onPress={() => {
                     client.connect({localAddress: 'localhost'});
                   }}
-                  title="Connect"
                 />
+              </View>
+              <View style={styles.sectionContainer}>
                 <Text style={styles.sectionDescription}>
-                  Interfaces:
+                  Connect Bluetooth
                 </Text>
-                <IconButton></IconButton>
+                <TextInput
+                  style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                  value='192.168.1.13'
+                />
                 <IconButton
-                  iconName="stop-circle"
+                  style={{paddingTop:12}}
+                  iconName="bluetooth"
                   iconType="font-awesome"
                   iconColor="#fff"
-                  title="Test"
+                  title="Connect Bluetooth"
                   onPress={() => {
-                    this.props.navigation.navigate('Manual');
+                    client.connect({localAddress: 'localhost'});
                   }}
                 />
               </View>
             </View>
           </ScrollView>
+        </SafeAreaView>
+        <SafeAreaView style={{flex: 1}}
+          style={styles.sectionContainer}
+        >
+          <Text style={styles.sectionDescription}>
+            Interfaces:
+          </Text>
+
+            <FlatList
+              data={[
+                {
+                  iconName: 'gamepad',
+                  title: 'Manual Control',
+                  key: 'Manual'
+                },
+                {
+                  iconName: 'flask',
+                  title: 'playground',
+                  key: 'Playground'
+                },
+              ]}
+              renderItem={({item}) =>
+                <IconButton
+                  style={{paddingTop:12}}
+                  iconName={item.iconName}
+                  iconType="font-awesome"
+                  iconColor="#fff"
+                  title={item.key}
+                  onPress={() => {
+                    this.props.navigation.navigate(item.screen);
+                  }}
+                />
+              }
+            />
         </SafeAreaView>
       </>
     );

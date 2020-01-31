@@ -23,6 +23,7 @@ class IconButton extends React.PureComponent {
                     iconContainerStyle={{position: 'absolute', left: 10}}
                     title={this.props.title}
                     onPress={this.props.onPress}
+                    style={this.props.style}
                   />
             </>
         );

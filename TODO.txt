@@ -13,6 +13,12 @@
     [] Battery and plug seperate?
     [] Plug replaces battery when plugged in?
     [] ALways battery unless battery is not connected, then plug?
+[] Connect page
+  [] load all subpages from a JSON file?
+  [] Create a connected redux action and state
+  [] Disable all subpages until connected
+  [] Switch connect button to a disconnect button when connected
+  [] Disable all subpages after disconnect
 [X] UI Layout
   [X] Checkout https://facebook.github.io/react-native/docs/navigation
   [X] Work through the fundamentals: https://reactnavigation.org/docs/en/navigating.html
