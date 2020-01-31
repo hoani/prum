@@ -15,6 +15,8 @@ import {
 
 import { Icon, Button } from 'react-native-elements';
 
+import IconButton from '../input/IconButton';
+
 
 import {AppContext} from '../state/appContext';
 
@@ -67,22 +69,21 @@ export default class ConnectScreen extends React.Component {
                 <Button
                   onPress={() => {
                     client.connect({localAddress: 'localhost'});
-                    this.props.navigation.navigate('Manual');
                   }}
                   title="Connect"
                 />
                 <Text style={styles.sectionDescription}>
                   Interfaces:
                 </Text>
-                <Button
-                  icon={{
-                      name:'stop-circle',
-                      type:'font-awesome',
-                      color:'#fff',
-                      position: 'absolute',
-                      left: 2,
+                <IconButton></IconButton>
+                <IconButton
+                  iconName="stop-circle"
+                  iconType="font-awesome"
+                  iconColor="#fff"
+                  title="Test"
+                  onPress={() => {
+                    this.props.navigation.navigate('Manual');
                   }}
-                  title="Button with icon component"
                 />
               </View>
             </View>
