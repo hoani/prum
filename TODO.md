@@ -5,12 +5,19 @@
   [X] Move reducer into src
   [X] Move comms into src
 [X] Implement progress circle with icon
-[] Progress circle value:
-  [] Seperate out multiplier from display multiplier
-  [] Add a unit parameter (can be empty by default)
-  [] Add format parameter (can be {:3f} by default)
+[X] Progress circle value:
+  [X] Seperate out multiplier from display multiplier
+  [X] Add a unit parameter (can be empty by default)
+  [X] Add format parameter (can be {:3f} by default)
+  [X] Autoscale based on definable height
+  [] Add bar color changes based on percentage
+[] Icon progress circle:
+  [X] Autoscale based on definable height
+  [] Bar color changes based on percentage
+  [] Add text option
+  [] If no icon is defined, make it default to text progress circle
 [] Connect page
-  [] load all subpages from a JSON file?
+  [] pass all screens to this page from the app file as a config
   [] Create a connected redux action and state
   [] Disable all subpages until connected
   [] Switch connect button to a disconnect button when connected
@@ -29,4 +36,10 @@
   [] Consider the 1, 1.5, 2, 3, 5, 8 scaling strategy
 [] Other things
   [] Add leetware logo
+
+
+Other ideas:
+  * Could be useful to make a progress circle in a progress circle?
+  * May be nice to have a progress circle with icon which also contains the
+  labeled value
 

@@ -12,9 +12,6 @@ import {
 
 import Image from 'react-native-scalable-image';
 
-import { Icon } from 'react-native-elements';
-
-import PlotSingle from '../charts/PlotSingle';
 import PlotMulti from '../charts/PlotMulti';
 import ProgressCircleValue from '../charts/ProgressCircleValue';
 import ProgressCircleIcon from '../charts/ProgressCircleIcon';
@@ -23,7 +20,6 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-import {Packet} from 'leap-protocol';
 import {AppContext} from '../state/appContext';
 
 
@@ -51,9 +47,15 @@ export default class PlaygroundScreen extends React.Component {
                 <Text style={styles.sectionTitle}>Component Playground</Text>
               </View>
 
-              <View style={{flex:3}} >
+              <View style={{flex:3, flexDirection: "row"}} >
+                <View style={{flex:2}}>
                 <ProgressCircleIcon path="health/os/cpuse" multiplier={0.01} />
-                <ProgressCircleValue path="health/os/cpuse" multiplier={0.01} />
+                </View><View style={{flex:1}}>
+
+                <ProgressCircleValue path="health/os/cpuse" multiplier={0.01} unit="%" decimalPlaces={1} height={48} />
+                </View><View style={{flex:3}}>
+                <ProgressCircleValue path="health/os/cpuse" multiplier={0.01} unit="%" decimalPlaces={1} height={200} />
+                </View>
               </View>
               <View style={{flex:3}}>
                 {/* <PlotSingle path = "imu/gyros/x" show_x = {false} /> */}
