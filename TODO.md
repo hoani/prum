@@ -10,12 +10,12 @@
   [X] Add a unit parameter (can be empty by default)
   [X] Add format parameter (can be {:3f} by default)
   [X] Autoscale based on definable height
-  [] Add bar color changes based on percentage
-[] Icon progress circle:
+  [X] Add bar color changes based on percentage
+[X] Icon progress circle:
   [X] Autoscale based on definable height
-  [] Bar color changes based on percentage
-  [] Add text option
-  [] If no icon is defined, make it default to text progress circle
+  [X] Bar color changes based on percentage
+  [X] Add text option
+  [X] If no icon is defined, make it default to text progress circle
 [] Connect page
   [] pass all screens to this page from the app file as a config
   [] Create a connected redux action and state

@@ -21,16 +21,22 @@ class ProgressCircleIcon extends React.PureComponent {
         path: "",
         height: 120,
         decimalPlaces: 2,
-        unit: ""
+        textUnit: "",
+        fontSizePercent: 100.0,
+        showText: true,
+        barColors: ['#d20', '#4b4'],
+        barIntervals: [40.0, 100.0],
+
     };
 
     render() {
         let { height, iconColors, iconNames, iconTypes, iconIntervals } = this.props;
         let { rawValue, multiplier, textMultiplier} = this.props;
-        let { decimalPlaces, unit} = this.props;
-        let iconName = "question";
-        let iconType = "font-awesome";
-        let iconColor = "#FFF";
+
+
+        let iconName = "";
+        let iconType = "";
+        let iconColor = "";
 
         for (let i = 0; i < iconIntervals.length; i+=1) {
             if (rawValue <= iconIntervals[i]) {
@@ -41,81 +47,71 @@ class ProgressCircleIcon extends React.PureComponent {
             }
         }
 
+        let {barColors, barIntervals} = this.props;
+
+        let barColor = barColors[barColors.length -1]
+
+        for (let i = 0; i < barIntervals.length; i+=1) {
+            if (rawValue <= barIntervals[i]) {
+                barColor = barColors[i];
+                break;
+            }
+        }
+
         let strokeWidth = height/10.0;
         let value = (rawValue * multiplier)
         let textValue = (rawValue * textMultiplier)
 
         const Label = ({height}) => {
+            let { decimalPlaces, textUnit, fontSizePercent, showText} = this.props;
+
+            let fontSize = fontSizePercent * 0.01 * (height * 0.25);
             return (
                 <>
-                    <G
-                        style={{position:'absolute', alignSelf:'center'}}
-
-                        x={0}
-                        y={0}
-                        textAnchor={'middle'}
-                        alignmentBaseline={'middle'}>
-                        <Icon
-                            name={iconName}
-                            type={iconType}
-                            size={height/2}
-                            color={iconColor}
-                            containerStyle ={{
-                                alignSelf:'center',
-                                position:'absolute',
-                                top: height/4,
-                            }}
-                        />
-                    </G>
+                    { showText ?
                     <Text
                         x={0}
                         y={0}
                         fill={'white'}
                         textAnchor={'middle'}
                         alignmentBaseline={'middle'}
-                        fontSize={height/4}
+                        fontSize={fontSize}
+                        fontWeight={'bold'}
                         stroke={'black'}
-                        strokeWidth={height/480}
+                        strokeWidth={height/256}
                     >
-                        {(textValue).toFixed(decimalPlaces) + unit}
+                        {(textValue).toFixed(decimalPlaces) + textUnit}
                     </Text>
+                    : <></>}
                 </>
             )
         }
 
         return (
             <>
+                { iconName !== "" ?
+                <Icon
+                    name={iconName}
+                    type={iconType}
+                    size={height*0.6}
+                    color={iconColor}
+                    containerStyle ={{
+                        alignSelf:'center',
+                        position:'absolute',
+                        top: height*0.2,
+                    }}
+                />
+                : <></>}
                 <ProgressCircle
                     style={ { height } }
                     progress={ value }
                     data={ value}
                     strokeWidth={strokeWidth}
-                    progressColor={'rgb(134, 65, 244)'}
+                    progressColor={barColor}
+
                 >
+                    <Label/>
                 </ProgressCircle>
-                <Icon
-                    name={iconName}
-                    type={iconType}
-                    size={height/2}
-                    color={iconColor}
-                    containerStyle ={{
-                        alignSelf:'center',
-                        position:'absolute',
-                        top: height/4,
-                    }}
-                />
-                <Text
-                        x={0}
-                        y={0}
-                        fill={'white'}
-                        textAnchor={'middle'}
-                        alignmentBaseline={'middle'}
-                        fontSize={height/4}
-                        stroke={'black'}
-                        strokeWidth={height/480}
-                    >
-                    {(textValue).toFixed(decimalPlaces) + unit}
-                </Text>
             </>
         )
     }
