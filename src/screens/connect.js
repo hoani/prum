@@ -116,7 +116,7 @@ export default class ConnectScreen extends React.Component {
                 },
                 {
                   iconName: 'flask',
-                  title: 'playground',
+                  title: 'Playground',
                   key: 'Playground'
                 },
               ]}
@@ -126,9 +126,9 @@ export default class ConnectScreen extends React.Component {
                   iconName={item.iconName}
                   iconType="font-awesome"
                   iconColor="#fff"
-                  title={item.key}
+                  title={item.title}
                   onPress={() => {
-                    this.props.navigation.navigate(item.screen);
+                    this.props.navigation.navigate(item.key);
                   }}
                 />
               }

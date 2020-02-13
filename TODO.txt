@@ -4,15 +4,11 @@
 [X] Structure
   [X] Move reducer into src
   [X] Move comms into src
-[] UI Element: Battery Indicator
-  [] Check out
-    https://react-native-elements.github.io/react-native-elements/docs/1.1.0/icon.html
-    https://fontawesome.com/icons?d=gallery&q=plug
-    https://fontawesome.com/icons?d=gallery&q=battery
-  [] Determine a design:
-    [] Battery and plug seperate?
-    [] Plug replaces battery when plugged in?
-    [] ALways battery unless battery is not connected, then plug?
+[X] Implement progress circle with icon
+[] Progress circle value:
+  [] Seperate out multiplier from display multiplier
+  [] Add a unit parameter (can be empty by default)
+  [] Add format parameter (can be {:3f} by default)
 [] Connect page
   [] load all subpages from a JSON file?
   [] Create a connected redux action and state

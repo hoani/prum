@@ -1,7 +1,7 @@
 import React from 'react'
 import { ProgressCircle }  from 'react-native-svg-charts';
 import { View } from 'react-native';
-import { Text } from 'react-native-svg'
+import { Text } from 'react-native-svg';
 
 
 import { connect } from 'react-redux';
@@ -31,7 +31,7 @@ class ProgressCircleValue extends React.PureComponent {
                     stroke={'black'}
                     strokeWidth={0.2}
                 >
-                    {(Math.round(value / multiplier)).toFixed(1)}
+                    {((value / multiplier)).toFixed(1)}
                 </Text>
             )
         }

@@ -17,6 +17,7 @@ import { Icon } from 'react-native-elements';
 import PlotSingle from '../charts/PlotSingle';
 import PlotMulti from '../charts/PlotMulti';
 import ProgressCircleValue from '../charts/ProgressCircleValue';
+import ProgressCircleIcon from '../charts/ProgressCircleIcon';
 
 import {
   Colors,
@@ -28,7 +29,7 @@ import {AppContext} from '../state/appContext';
 
 export default class PlaygroundScreen extends React.Component {
   static navigationOptions = {
-    title: 'Manual Control',
+    title: 'Playground',
   };
   render() {
     let client = this.context.client;
@@ -46,122 +47,25 @@ export default class PlaygroundScreen extends React.Component {
               </View>
             )}
             <View style={styles.body}>
-              <View style={{justifyContent:'center', alignItems:'center'}}>
-                <Image
-                  resizeMode="center"
-                  width={Dimensions.get('window').width}
-                  source={require("../../images/autodesk.png")}
-                />
-              </View>
               <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Hoani's Robot Control</Text>
-                <Text style={styles.sectionDescription}>
-                  Manual Control
-                </Text>
+                <Text style={styles.sectionTitle}>Component Playground</Text>
               </View>
 
-              <View style={{flex:1, flexDirection:'row'}}>
-                <View style={{flex:5, flexDirection:'column'}}>
-                  <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
-                    <View style={{flex:1, backgroundColor:"#eee"}} />
-                    <View style={{flex:1}} >
-                    <Icon
-                        raised
-                        name='angle-double-up'
-                        type='font-awesome'
-                        color='#f50'
-                        onPress={() => {
-                          let packet = new Packet(
-                            'set',
-                            'control/manual',
-                            ['FW', 0.2, 0.5]
-                          );
-                          client.send(packet);
-                        }}
-                      />
-                    </View>
-                    <View style={{flex:1, backgroundColor:"#eee"}} />
-                  </View>
-                  <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
-                  <View style={{flex:1}} >
-                    <Icon
-                        raised
-                        name='angle-double-left'
-                        type='font-awesome'
-                        color='#f50'
-                        onPress={() => {
-                          let packet = new Packet(
-                            'set',
-                            'control/manual',
-                            ['LT', 0.2, 0.5]
-                          );
-                          client.send(packet);
-                        }}
-                      />
-                  </View>
-                  <View style={{flex:1, backgroundColor:"#eee"}}>
-                    <Icon
-                      raised
-                      name='stop-circle'
-                      type='font-awesome'
-                      color='#f50'
-                      onPress={() => {
-                        let packet = new Packet(
-                          'set',
-                          'control/disable'
-                        );
-                        client.send(packet);
-                      }}
-                    />
-                  </View>
-                  <View style={{flex:1}} >
-                    <Icon
-                        raised
-                        name='angle-double-right'
-                        type='font-awesome'
-                        color='#f50'
-                        onPress={() => {
-                          let packet = new Packet(
-                            'set',
-                            'control/manual',
-                            ['RT', 0.2, 0.5]
-                          );
-                          client.send(packet);
-                        }}
-                      />
-                  </View>
-                  </View>
-                  <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
-                    <View style={{flex:1, backgroundColor:"#eee"}} />
-                      <View style={{flex:1}} >
-                        <Icon
-                            raised
-                            name='angle-double-down'
-                            type='font-awesome'
-                            color='#f50'
-                            onPress={() => {
-                              let packet = new Packet(
-                                'set',
-                                'control/manual',
-                                ['BW', 0.2, 0.5]
-                              );
-                              client.send(packet);
-                            }}
-                          />
-                      </View>
-                    <View style={{flex:1, backgroundColor:"#eee"}} />
-                  </View>
-                </View>
-                <View style={{flex:1}} />
-                <View style={{flex:3}} >
-                  <ProgressCircleValue path="health/os/cpuse" multiplier={0.01} />
-                </View>
-                <View style={{flex:1}} />
+              <View style={{flex:3}} >
+                <ProgressCircleIcon path="health/os/cpuse" multiplier={0.01} />
+                <ProgressCircleValue path="health/os/cpuse" multiplier={0.01} />
               </View>
               <View style={{flex:3}}>
                 {/* <PlotSingle path = "imu/gyros/x" show_x = {false} /> */}
                 <PlotMulti paths = {["imu/gyros/y", "imu/gyros/z"]} colors = {['#8a2be2', '#ff1493']}/>
                 <PlotMulti paths = {["imu/accel/x", "imu/accel/y","imu/accel/z"]} />
+              </View>
+              <View style={{justifyContent:'center', alignItems:'center'}}>
+              <Image
+                  resizeMode="center"
+                  width={Dimensions.get('window').width}
+                  source={require("../../images/autodesk.png")}
+                />
               </View>
             </View>
           </ScrollView>
