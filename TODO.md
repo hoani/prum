@@ -16,6 +16,7 @@
   [X] Bar color changes based on percentage
   [X] Add text option
   [X] If no icon is defined, make it default to text progress circle
+  [X] Tidy up progress bar defaults
 [] Connect page
   [] pass all screens to this page from the app file as a config
   [] Create a connected redux action and state

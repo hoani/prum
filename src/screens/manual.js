@@ -16,7 +16,7 @@ import { Icon } from 'react-native-elements';
 
 import PlotSingle from '../charts/PlotSingle';
 import PlotMulti from '../charts/PlotMulti';
-import ProgressCircleValue from '../charts/ProgressCircleValue';
+import ProgressCircle from '../charts/ProgressCircle';
 
 import {
   Colors,
@@ -154,7 +154,7 @@ export default class ManualScreen extends React.Component {
                 </View>
                 <View style={{flex:1}} />
                 <View style={{flex:3}} >
-                  <ProgressCircleValue path="health/os/cpuse" multiplier={0.01} />
+                  <ProgressCircle path="health/os/cpuse" multiplier={0.01} showText={true} />
                 </View>
                 <View style={{flex:1}} />
               </View>

@@ -13,8 +13,7 @@ import {
 import Image from 'react-native-scalable-image';
 
 import PlotMulti from '../charts/PlotMulti';
-import ProgressCircleValue from '../charts/ProgressCircleValue';
-import ProgressCircleIcon from '../charts/ProgressCircleIcon';
+import ProgressCircle from '../charts/ProgressCircle';
 
 import {
   Colors,
@@ -49,12 +48,24 @@ export default class PlaygroundScreen extends React.Component {
 
               <View style={{flex:3, flexDirection: "row"}} >
                 <View style={{flex:2}}>
-                <ProgressCircleIcon path="health/os/cpuse" multiplier={0.01} />
+                <ProgressCircle
+                  path="health/os/cpuse"
+                  multiplier={0.01}
+                  textMultiplier={1.0}
+                  textUnit="%"
+                  fontSizePercent={80}
+                  iconNames={['battery-0', 'battery-1', 'battery-2', 'battery-3', 'battery-4']}
+                  iconTypes={['font-awesome', 'font-awesome', 'font-awesome', 'font-awesome', 'font-awesome']}
+                  iconColors={['#822', '#a82', '#6a2', '#492', '#282' ]}
+                  iconIntervals={[35.0, 39.0, 43.0, 47.0, 100.0 ]}
+                  barColors={['#a33', '#da3', '#8d3', '#5b3', '#3a3' ]}
+                  barIntervals={[35.0, 39.0, 43.0, 47.0, 100.0 ]}
+                />
                 </View><View style={{flex:1}}>
 
-                <ProgressCircleValue path="health/os/cpuse" multiplier={0.01} unit="%" decimalPlaces={1} height={48} />
+                <ProgressCircle path="health/os/cpuse" multiplier={0.01} unit="%" decimalPlaces={1} height={48} />
                 </View><View style={{flex:3}}>
-                <ProgressCircleValue path="health/os/cpuse" multiplier={0.01} unit="%" decimalPlaces={1} height={200} />
+                <ProgressCircle path="health/os/cpuse" multiplier={0.01} unit="%" decimalPlaces={1} height={200} />
                 </View>
               </View>
               <View style={{flex:3}}>

@@ -1,31 +1,30 @@
 import React from 'react'
-import { ProgressCircle }  from 'react-native-svg-charts';
+import { ProgressCircle as SvgProgressCircle }  from 'react-native-svg-charts';
 import { Icon } from 'react-native-elements';
-import { View } from 'react-native';
 import { Text } from 'react-native-svg';
 
 import { connect } from 'react-redux';
 
 import { newData } from '../state/reducer';
 
-class ProgressCircleIcon extends React.PureComponent {
+class ProgressCircle extends React.PureComponent {
     static defaultProps = {
         rawValue: 0.0,
         offset: 0.0,
         multiplier: 1.0,
         textMultiplier: 1.0,
-        iconColors: ['#f50', '#2c2'],
-        iconNames: ["heart", "plug"],
-        iconTypes: ["font-awesome", "font-awesome"],
-        iconIntervals: [40.0, 100.0],
+        iconColors: [],
+        iconNames: [],
+        iconTypes: [],
+        iconIntervals: [],
         path: "",
         height: 120,
-        decimalPlaces: 2,
+        decimalPlaces: 0,
         textUnit: "",
         fontSizePercent: 100.0,
         showText: true,
-        barColors: ['#d20', '#4b4'],
-        barIntervals: [40.0, 100.0],
+        barColors: ['#77c'],
+        barIntervals: [100.0],
 
     };
 
@@ -78,7 +77,7 @@ class ProgressCircleIcon extends React.PureComponent {
                         fontSize={fontSize}
                         fontWeight={'bold'}
                         stroke={'black'}
-                        strokeWidth={height/256}
+                        strokeWidth={height/128}
                     >
                         {(textValue).toFixed(decimalPlaces) + textUnit}
                     </Text>
@@ -93,16 +92,16 @@ class ProgressCircleIcon extends React.PureComponent {
                 <Icon
                     name={iconName}
                     type={iconType}
-                    size={height*0.6}
+                    size={height*0.5}
                     color={iconColor}
                     containerStyle ={{
                         alignSelf:'center',
                         position:'absolute',
-                        top: height*0.2,
+                        top: height*0.25,
                     }}
                 />
                 : <></>}
-                <ProgressCircle
+                <SvgProgressCircle
                     style={ { height } }
                     progress={ value }
                     data={ value}
@@ -111,7 +110,7 @@ class ProgressCircleIcon extends React.PureComponent {
 
                 >
                     <Label/>
-                </ProgressCircle>
+                </SvgProgressCircle>
             </>
         )
     }
@@ -129,4 +128,4 @@ const mapDispatchToProps = {
     newData
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProgressCircleIcon);
+export default connect(mapStateToProps, mapDispatchToProps)(ProgressCircle);
