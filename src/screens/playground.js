@@ -13,6 +13,7 @@ import {
 import Image from 'react-native-scalable-image';
 
 import PlotMulti from '../charts/PlotMulti';
+import Plot3DOF from '../charts/Plot3DOF';
 import ProgressCircle from '../charts/ProgressCircle';
 
 import {
@@ -71,7 +72,7 @@ export default class PlaygroundScreen extends React.Component {
               <View style={{flex:3}}>
                 {/* <PlotSingle path = "imu/gyros/x" show_x = {false} /> */}
                 <PlotMulti paths = {["imu/gyros/y", "imu/gyros/z"]} colors = {['#8a2be2', '#ff1493']}/>
-                <PlotMulti paths = {["imu/accel/x", "imu/accel/y","imu/accel/z"]} />
+                <Plot3DOF title = "acceleration" paths = {["imu/accel/x", "imu/accel/y","imu/accel/z"]} />
               </View>
               <View style={{justifyContent:'center', alignItems:'center'}}>
               <Image

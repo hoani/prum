@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Path } from 'react-native-svg';
 
 import { AreaChart, Grid, XAxis } from 'react-native-svg-charts';
@@ -16,7 +16,7 @@ class PlotMulti extends React.PureComponent {
     }
 
     render() {
-        let { plot_data, paths, colors, show_x, yMin, yMax } = this.props;
+        let { title, plot_data, paths, colors, show_x, yMin, yMax } = this.props;
 
         const Line = ({ line, color }) => (
             <Path
@@ -34,6 +34,12 @@ class PlotMulti extends React.PureComponent {
 
         return (
             <View style={ { height: 200 } }>
+                { title !== "" ?
+                <View>
+                    <Text style={{textAlign:"center"}}>{title}</Text>
+                </View> :
+                <></>
+                }
                 <View style={ { height: 120 } }>
                 {
                     paths.map((path, index) => {
@@ -157,7 +163,8 @@ ConnectedPlotMulti.defaultProps = {
     plot_data: [],
     paths: [],
     colors: [],
-    show_x: true
+    show_x: true,
+    title: ""
 };
 
 export default ConnectedPlotMulti;

@@ -3,21 +3,21 @@ import { View } from 'react-native';
 
 import PlotMulti from './PlotMulti';
 
-class PlotSingle extends React.PureComponent {
+class Plot3DOF extends React.PureComponent {
     static defaultProps = {
         show_x: false,
-        path: "",
-        title: ""
+        paths: ["", "", ""],
+        title: title
     };
 
     render() {
-        let { path, show_x } = this.props;
+        let { paths, show_x, title } = this.props;
         return (
             <View>
-                <PlotMulti title={title} paths={[path]} show_x={show_x}/>
+                <PlotMulti title={title} paths={paths} show_x={show_x}/>
             </View>
         );
     }
 }
 
-export default PlotSingle;
+export default Plot3DOF;
