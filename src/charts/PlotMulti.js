@@ -12,12 +12,8 @@ import { newData } from '../state/reducer';
 
 class PlotMulti extends React.PureComponent {
 
-    // componentWillUnmount() {
-    //     clearInterval(this.interval);
-    // }
-
     render() {
-        let { title, plot_data, paths, colors, show_x, yMin, yMax, labels } = this.props;
+        let { title, plot_data, paths, colors, show_x, yMin, yMax, labels, height } = this.props;
 
         const PlotLine = ({ line, color }) => (
             <Path
@@ -34,20 +30,23 @@ class PlotMulti extends React.PureComponent {
         }
 
         return (
-            <View style={ { height: 200, flex: 1, flexDirection: "column" } }>
+            <View style={ { height: height, flex: 1, flexDirection: "column" } }>
                 { title !== "" ?
-                <View style={ alignSelf="center"}>
-                    <Text
-                        style={alignItems="center", justifyContent="center", borderWidth="1", borderColor="red"}
-                        width="100%"
-                        height="100%"
-                        fontSize={16}
-                        // fontWeight={'bold'}
-
+                    <View style={ {
+                        flexDirection: "row",
+                        alignContent: "center",
+                        justifyContent: "center",
+                        }}
                     >
+                        <Text
+                            style={{
+                                fontSize:20,
+                                fontWeight:"bold"
+                            }}
+                        >
                         {title}
-                    </Text>
-                </View> :
+                        </Text>
+                    </View> :
                 <></>
                 }
                 { labels.length > 0 ?
@@ -184,6 +183,7 @@ ConnectedPlotMulti.defaultProps = {
     show_x: true,
     title: "",
     labels: [],
+    height: 200,
 };
 
 export default ConnectedPlotMulti;

@@ -33,7 +33,9 @@ class Legend extends React.PureComponent {
             let iconType = iconTypes[index % iconTypes.length];
 
             return (
-              <View style={{
+              <View 
+                key={`LegendView-${index}`}
+                style={{
                 paddingLeft:5,
                 paddingRight:5,
                 flexDirection: "row",
@@ -41,12 +43,13 @@ class Legend extends React.PureComponent {
                 alignItems: 'center'
               }}>
                 <Icon
+                  key={`LegendIcon-${index}`}
                   name={iconName}
                   type={iconType}
                   color={color}
                   size={14}
                 />
-                <Text style={{paddingLeft: 5}} color={color}>{label}</Text>
+                <Text key={`LegendLabel-${index}`} style={{paddingLeft: 5}}>{label}</Text>
               </View>
             )
           })
