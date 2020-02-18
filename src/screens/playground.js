@@ -72,7 +72,11 @@ export default class PlaygroundScreen extends React.Component {
               <View style={{flex:3}}>
                 {/* <PlotSingle path = "imu/gyros/x" show_x = {false} /> */}
                 <PlotMulti paths = {["imu/gyros/y", "imu/gyros/z"]} colors = {['#8a2be2', '#ff1493']}/>
-                <Plot3DOF title = "acceleration" paths = {["imu/accel/x", "imu/accel/y","imu/accel/z"]} />
+                <Plot3DOF
+                  title = "acceleration"
+                  paths = {["imu/accel/x", "imu/accel/y","imu/accel/z"]}
+                  labels =  {["x", "y", "z"]}
+                />
               </View>
               <View style={{justifyContent:'center', alignItems:'center'}}>
               <Image

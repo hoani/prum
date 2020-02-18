@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { Path } from 'react-native-svg';
+import { StyleSheet, Text, View } from 'react-native';
+import Svg, { Path, Rect, Line, G } from 'react-native-svg';
 
 import { AreaChart, Grid, XAxis } from 'react-native-svg-charts';
+import Legend from './Legend'
 import * as shape from 'd3-shape';
 
 import { connect } from 'react-redux';
@@ -11,14 +12,14 @@ import { newData } from '../state/reducer';
 
 class PlotMulti extends React.PureComponent {
 
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
+    // componentWillUnmount() {
+    //     clearInterval(this.interval);
+    // }
 
     render() {
-        let { title, plot_data, paths, colors, show_x, yMin, yMax } = this.props;
+        let { title, plot_data, paths, colors, show_x, yMin, yMax, labels } = this.props;
 
-        const Line = ({ line, color }) => (
+        const PlotLine = ({ line, color }) => (
             <Path
                 key={'line'}
                 d={line}
@@ -33,14 +34,31 @@ class PlotMulti extends React.PureComponent {
         }
 
         return (
-            <View style={ { height: 200 } }>
+            <View style={ { height: 200, flex: 1, flexDirection: "column" } }>
                 { title !== "" ?
-                <View>
-                    <Text style={{textAlign:"center"}}>{title}</Text>
+                <View style={ alignSelf="center"}>
+                    <Text
+                        style={alignItems="center", justifyContent="center", borderWidth="1", borderColor="red"}
+                        width="100%"
+                        height="100%"
+                        fontSize={16}
+                        // fontWeight={'bold'}
+
+                    >
+                        {title}
+                    </Text>
                 </View> :
                 <></>
                 }
-                <View style={ { height: 120 } }>
+                { labels.length > 0 ?
+                    <Legend
+                        labels={labels}
+                        colors={colors}
+                    /> :
+                    <></>
+                }
+
+                <View style={ { flex: 1, flexGrow: 1 } }>
                 {
                     paths.map((path, index) => {
                         let data = (path in plot_data) ? plot_data[path] : [];
@@ -58,7 +76,7 @@ class PlotMulti extends React.PureComponent {
                                 yMax = {yMax}
                             >
                                 {(index === 0) ? (<Grid/>) : <></>}
-                                <Line color={colors[index]}/>
+                                <PlotLine color={colors[index]}/>
                             </AreaChart>
                         )
                     })
@@ -164,7 +182,8 @@ ConnectedPlotMulti.defaultProps = {
     paths: [],
     colors: [],
     show_x: true,
-    title: ""
+    title: "",
+    labels: [],
 };
 
 export default ConnectedPlotMulti;
