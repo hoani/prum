@@ -34,7 +34,7 @@
   [X] Default colors for multi plots
   [X] Turn plot single into a specialized multiplot
   [X] Create plot3DOF as a specialized multiplot
-  [] Show Legend
+  [X] Show Legend
   [X] Show Title
   [] Add YAxis
   [] Consider the 1, 1.5, 2, 3, 5, 8 scaling strategy

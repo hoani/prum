@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Svg, { Path, Rect, Line, G } from 'react-native-svg';
+import { Path } from 'react-native-svg';
 
-import { AreaChart, Grid, XAxis } from 'react-native-svg-charts';
+import { AreaChart, Grid, XAxis, YAxis } from 'react-native-svg-charts';
 import Legend from './Legend'
 import * as shape from 'd3-shape';
 
@@ -57,14 +57,29 @@ class PlotMulti extends React.PureComponent {
                     <></>
                 }
 
-                <View style={ { flex: 1, flexGrow: 1 } }>
+                <View style={ { flex: 1, flexGrow: 1, flexDirection: 'row' } }>
+                    <YAxis
+                        data = {[yMin, yMax]}
+                        min={yMin}
+                        max={yMax}
+                        svg={{
+                            fill: 'grey',
+                            fontSize: 14,
+                            marginLeft: 5,
+                        }}
+                        contentInset={ { top: 10, bottom: 10 } }
+                        numberOfTicks={6}
+                        formatLabel={(value) => `${value}`}
+                    />
+                    <View style={{ flex: 1, marginLeft: 10 }}>
+                        <View style={{flex: 1}}>
                 {
                     paths.map((path, index) => {
                         let data = (path in plot_data) ? plot_data[path] : [];
                         return (
                             <AreaChart
                                 key={path}
-                                style={ StyleSheet.absoluteFill }
+                                style={ { ...StyleSheet.absoluteFill} }
                                 data={ data }
                                 svg={{ fill: colors[index]+"10" }}
                                 contentInset={ { top: 10, bottom: 10 } }
@@ -84,16 +99,18 @@ class PlotMulti extends React.PureComponent {
                 <View>
                     { (show_x && axis_data.length > 0) ? (
                     <XAxis
-                        style={{ marginHorizontal: -10, marginTop: 5}}
+                        style={{ marginLeft: 20, marginRight: -10, marginTop: 5}}
                         data={ axis_data }
                         yAccessor={ ({ item }) => item.y }
                         xAccessor={ ({ item }) => item.x }
                         formatLabel={ (value, index) => (Math.round(value * 10) % 20 === 0) ? (Math.round(value * 100) / 100).toFixed(1): null }
                         contentInset={{ left: 25, right: 25 }}
-                        svg = {{fontSize:16, fill:'grey'}}
+                        svg = {{fontSize:14, fill:'grey'}}
                     />) :
                     <></>
                     }
+                </View>
+                </View>
                 </View>
             </View>
         )
