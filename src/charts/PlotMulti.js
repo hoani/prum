@@ -13,7 +13,9 @@ import { newData } from '../state/reducer';
 class PlotMulti extends React.PureComponent {
 
     render() {
-        let { title, plot_data, paths, colors, show_x, yMin, yMax, labels, height } = this.props;
+        let { title, plot_data, paths, colors, labels, height } = this.props;
+        let { yMin, yMax } = this.props;
+        let { show_x, show_y } = this.props;
 
         const PlotLine = ({ line, color }) => (
             <Path
@@ -31,22 +33,23 @@ class PlotMulti extends React.PureComponent {
 
         return (
             <View style={ { height: height, flex: 1, flexDirection: "column" } }>
-                { title !== "" ?
-                    <View style={ {
-                        flexDirection: "row",
-                        alignContent: "center",
-                        justifyContent: "center",
+                {
+                title !== "" ?
+                <View style={ {
+                    flexDirection: "row",
+                    alignContent: "center",
+                    justifyContent: "center",
+                    }}
+                >
+                    <Text
+                        style={{
+                            fontSize:20,
+                            fontWeight:"bold"
                         }}
                     >
-                        <Text
-                            style={{
-                                fontSize:20,
-                                fontWeight:"bold"
-                            }}
-                        >
-                        {title}
-                        </Text>
-                    </View> :
+                    {title}
+                    </Text>
+                </View> :
                 <></>
                 }
                 { labels.length > 0 ?
@@ -58,7 +61,10 @@ class PlotMulti extends React.PureComponent {
                 }
 
                 <View style={ { flex: 1, flexGrow: 1, flexDirection: 'row' } }>
+                    {
+                    show_y ?
                     <YAxis
+                        style={{paddingLeft:5}}
                         data = {[yMin, yMax]}
                         min={yMin}
                         max={yMax}
@@ -70,47 +76,46 @@ class PlotMulti extends React.PureComponent {
                         contentInset={ { top: 10, bottom: 10 } }
                         numberOfTicks={6}
                         formatLabel={(value) => `${value}`}
-                    />
-                    <View style={{ flex: 1, marginLeft: 10 }}>
-                        <View style={{flex: 1}}>
-                {
-                    paths.map((path, index) => {
-                        let data = (path in plot_data) ? plot_data[path] : [];
-                        return (
-                            <AreaChart
-                                key={path}
-                                style={ { ...StyleSheet.absoluteFill} }
-                                data={ data }
-                                svg={{ fill: colors[index]+"10" }}
-                                contentInset={ { top: 10, bottom: 10 } }
-                                curve={ shape.curveLinear }
-                                yAccessor={ ({ item }) => item.y }
-                                xAccessor={ ({ item }) => item.x }
-                                yMin = {yMin}
-                                yMax = {yMax}
-                            >
-                                {(index === 0) ? (<Grid/>) : <></>}
-                                <PlotLine color={colors[index]}/>
-                            </AreaChart>
-                        )
-                    })
-                }
-                </View>
-                <View>
-                    { (show_x && axis_data.length > 0) ? (
-                    <XAxis
-                        style={{ marginLeft: 20, marginRight: -10, marginTop: 5}}
-                        data={ axis_data }
-                        yAccessor={ ({ item }) => item.y }
-                        xAccessor={ ({ item }) => item.x }
-                        formatLabel={ (value, index) => (Math.round(value * 10) % 20 === 0) ? (Math.round(value * 100) / 100).toFixed(1): null }
-                        contentInset={{ left: 25, right: 25 }}
-                        svg = {{fontSize:14, fill:'grey'}}
-                    />) :
+                    /> :
                     <></>
                     }
-                </View>
-                </View>
+                    <View style={{ flex: 1, marginLeft: 10 }}>
+                        {
+                        paths.map((path, index) => {
+                            let data = (path in plot_data) ? plot_data[path] : [];
+                            return (
+                                <AreaChart
+                                    key={path}
+                                    style={ { ...StyleSheet.absoluteFill} }
+                                    data={ data }
+                                    svg={{ fill: colors[index]+"10" }}
+                                    contentInset={ { top: 10, bottom: 10 } }
+                                    curve={ shape.curveLinear }
+                                    yAccessor={ ({ item }) => item.y }
+                                    xAccessor={ ({ item }) => item.x }
+                                    yMin = {yMin}
+                                    yMax = {yMax}
+                                >
+                                    {(index === 0) ? (<Grid/>) : <></>}
+                                    <PlotLine color={colors[index]}/>
+                                </AreaChart>
+                            )
+                        })
+                        }
+                            { (show_x && axis_data.length > 0) ? (
+                                <View style={{justifyContent: "flex-end", height:"100%"}}>
+                            <XAxis
+                                style={{ marginHorizontal: -10, marginTop: 5}}
+                                data={ axis_data }
+                                yAccessor={ ({ item }) => item.y }
+                                xAccessor={ ({ item }) => item.x }
+                                formatLabel={ (value, index) => (Math.round(value * 10) % 20 === 0) ? (Math.round(value * 100) / 100).toFixed(1): null }
+                                contentInset={{ left: 25, right: 25 }}
+                                svg = {{fontSize:14, fill:'grey'}}
+                            /></View>) :
+                            <></>
+                            }
+                    </View>
                 </View>
             </View>
         )
@@ -198,6 +203,7 @@ ConnectedPlotMulti.defaultProps = {
     paths: [],
     colors: [],
     show_x: true,
+    show_y: true,
     title: "",
     labels: [],
     height: 200,

@@ -76,6 +76,7 @@ export default class PlaygroundScreen extends React.Component {
                   title = "acceleration"
                   paths = {["imu/accel/x", "imu/accel/y","imu/accel/z"]}
                   labels =  {["x", "y", "z"]}
+                  show_y = {true}
                 />
               </View>
               <View style={{justifyContent:'center', alignItems:'center'}}>
