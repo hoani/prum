@@ -10,6 +10,7 @@ import React from 'react';
 
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
+import { ThemeProvider } from 'react-native-elements';
 
 import { createStore } from 'redux';
 import { Provider} from 'react-redux';
@@ -24,6 +25,7 @@ import leap_config from './protocol.json';
 import ConnectScreen from './src/screens/connect';
 import ManualScreen from './src/screens/manual';
 import PlaygroundScreen from './src/screens/playground';
+import {theme, navbarStyle} from './src/style/style';
 
 import 'react-native-gesture-handler';
 
@@ -44,11 +46,11 @@ const MainNavigator = createStackNavigator(
   },
   {
     initialRouteName: 'Connect',
+    defaultNavigationOptions: navbarStyle,
   }
 );
 
 const AppContainer = createAppContainer(MainNavigator);
-
 
 
 export default class App extends React.Component {
@@ -70,11 +72,13 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <AppContext.Provider value={{client: client}}>
-        <Provider store={store}>
-          <AppContainer screenProps/>
-        </Provider>
-      </AppContext.Provider>
+      <ThemeProvider theme = {theme}>
+        <AppContext.Provider value={{client: client}}>
+          <Provider store={store}>
+            <AppContainer screenProps/>
+          </Provider>
+        </AppContext.Provider>
+      </ThemeProvider>
     );
   }
 }

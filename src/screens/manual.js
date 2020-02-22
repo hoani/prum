@@ -7,14 +7,12 @@ import {
   View,
   Text,
   StatusBar,
-  Button,
 } from 'react-native';
 
 import Image from 'react-native-scalable-image';
 
 import { Icon } from 'react-native-elements';
 
-import PlotSingle from '../charts/PlotSingle';
 import PlotMulti from '../charts/PlotMulti';
 import ProgressCircle from '../charts/ProgressCircle';
 
@@ -34,7 +32,7 @@ export default class ManualScreen extends React.Component {
     let client = this.context.client;
     return (
       <>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar barStyle="light-content" />
         <SafeAreaView>
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"

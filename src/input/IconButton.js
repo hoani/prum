@@ -5,7 +5,6 @@ class IconButton extends React.PureComponent {
     static defaultProps = {
         iconName:"glass",
         iconType:"font-awesome",
-        iconColor:"#fff",
         title:"title not found",
         onPress:()=>{},
     };
@@ -17,7 +16,6 @@ class IconButton extends React.PureComponent {
                     icon={{
                         name: this.props.iconName,
                         type: this.props.iconType,
-                        color: this.props.iconColor,
                     }}
                     containerStyle={{position: 'relative'}}
                     iconContainerStyle={{position: 'absolute', left: 10}}

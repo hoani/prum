@@ -31,7 +31,7 @@ export default class PlaygroundScreen extends React.Component {
     let client = this.context.client;
     return (
       <>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar barStyle="light-content" />
         <SafeAreaView>
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
