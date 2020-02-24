@@ -18,8 +18,8 @@
   [X] If no icon is defined, make it default to text progress circle
   [X] Tidy up progress bar defaults
 [] Connect page
-  [] pass all screens to this page from the app file as a config
-  [] Create a connected redux action and state
+  [X] pass all screens to this page from the app file as a config
+  [] Create a "connected" redux action and state
   [] Disable all subpages until connected
   [] Switch connect button to a disconnect button when connected
   [] Disable all subpages after disconnect
@@ -36,14 +36,10 @@
   [X] Create plot3DOF as a specialized multiplot
   [X] Show Legend
   [X] Show Title
-  [] Add YAxis
+  [X] Add YAxis
   [] Consider the 1, 1.5, 2, 3, 5, 8 scaling strategy
 [] Other things
   [] Add leetware logo
 
 
-Other ideas:
-  * Could be useful to make a progress circle in a progress circle?
-  * May be nice to have a progress circle with icon which also contains the
-  labeled value
 

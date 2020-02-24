@@ -71,9 +71,21 @@ export default class App extends React.Component {
   };
 
   render() {
+    let uiScreens = [
+      {
+        iconName: 'gamepad',
+        title: 'Manual Control',
+        key: 'Manual'
+      },
+      {
+        iconName: 'flask',
+        title: 'Playground',
+        key: 'Playground'
+      },
+    ];
     return (
       <ThemeProvider theme = {theme}>
-        <AppContext.Provider value={{client: client}}>
+        <AppContext.Provider value={{client: client, uiScreens: uiScreens}}>
           <Provider store={store}>
             <AppContainer screenProps/>
           </Provider>

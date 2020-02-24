@@ -19,6 +19,7 @@ import IconButton from '../input/IconButton';
 import {AppContext} from '../state/appContext';
 
 export default class ConnectScreen extends React.Component {
+
   static navigationOptions = {
     title: 'Connect',
     headerRight: () => (
@@ -46,7 +47,7 @@ export default class ConnectScreen extends React.Component {
     ),
   };
   render() {
-    let client = this.context.client;
+    let {uiScreens, client} = this.context;
     return (
       <>
         <StatusBar barStyle="light-content" />
@@ -109,18 +110,7 @@ export default class ConnectScreen extends React.Component {
           </Text>
 
             <FlatList
-              data={[
-                {
-                  iconName: 'gamepad',
-                  title: 'Manual Control',
-                  key: 'Manual'
-                },
-                {
-                  iconName: 'flask',
-                  title: 'Playground',
-                  key: 'Playground'
-                },
-              ]}
+              data = {uiScreens}
               renderItem={({item}) =>
                 <IconButton
                   style={{paddingTop:12}}
@@ -141,43 +131,4 @@ export default class ConnectScreen extends React.Component {
   }
 };
 ConnectScreen.contextType = AppContext;
-
-// const styles = StyleSheet.create({
-//   scrollView: {
-//     backgroundColor: Colors.lighter,
-//   },
-//   engine: {
-//     position: 'absolute',
-//     right: 0,
-//   },
-//   body: {
-//     backgroundColor: Colors.white,
-//   },
-//   sectionContainer: {
-//     marginTop: 32,
-//     paddingHorizontal: 24,
-//   },
-//   sectionTitle: {
-//     fontSize: 24,
-//     fontWeight: '600',
-//     color: Colors.black,
-//   },
-//   sectionDescription: {
-//     marginTop: 8,
-//     fontSize: 18,
-//     fontWeight: '400',
-//     color: Colors.dark,
-//   },
-//   highlight: {
-//     fontWeight: '700',
-//   },
-//   footer: {
-//     color: Colors.dark,
-//     fontSize: 12,
-//     fontWeight: '600',
-//     padding: 4,
-//     paddingRight: 12,
-//     textAlign: 'right',
-//   },
-// });
 
