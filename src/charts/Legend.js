@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { colors as styleColors} from "../style/style.js";
 
 
 class Legend extends React.PureComponent {
@@ -33,7 +34,7 @@ class Legend extends React.PureComponent {
             let iconType = iconTypes[index % iconTypes.length];
 
             return (
-              <View 
+              <View
                 key={`LegendView-${index}`}
                 style={{
                 paddingLeft:5,
@@ -49,7 +50,7 @@ class Legend extends React.PureComponent {
                   color={color}
                   size={14}
                 />
-                <Text key={`LegendLabel-${index}`} style={{paddingLeft: 5}}>{label}</Text>
+                <Text key={`LegendLabel-${index}`} style={{paddingLeft: 5, color: styleColors.tNormal}}>{label}</Text>
               </View>
             )
           })

@@ -3,6 +3,8 @@ import { ProgressCircle as SvgProgressCircle }  from 'react-native-svg-charts';
 import { Icon } from 'react-native-elements';
 import { Text } from 'react-native-svg';
 
+import { colors as styleColors } from "../style/style.js";
+
 import { connect } from 'react-redux';
 
 import { newData } from '../state/reducer';
@@ -71,7 +73,7 @@ class ProgressCircle extends React.PureComponent {
                     <Text
                         x={0}
                         y={0}
-                        fill={'white'}
+                        fill={styleColors.tEmphasis}
                         textAnchor={'middle'}
                         alignmentBaseline={'middle'}
                         fontSize={fontSize}
@@ -106,6 +108,7 @@ class ProgressCircle extends React.PureComponent {
                     progress={ value }
                     data={ value}
                     strokeWidth={strokeWidth}
+                    backgroundColor={styleColors.c1dp}
                     progressColor={barColor}
 
                 >

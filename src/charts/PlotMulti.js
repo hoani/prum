@@ -10,6 +10,8 @@ import { connect } from 'react-redux';
 
 import { newData } from '../state/reducer';
 
+import { colors as styleColors } from "../style/style.js";
+
 class PlotMulti extends React.PureComponent {
 
     render() {
@@ -44,7 +46,8 @@ class PlotMulti extends React.PureComponent {
                     <Text
                         style={{
                             fontSize:20,
-                            fontWeight:"bold"
+                            fontWeight:"bold",
+                            color: styleColors.tEmphasis
                         }}
                     >
                     {title}
@@ -69,7 +72,7 @@ class PlotMulti extends React.PureComponent {
                         min={yMin}
                         max={yMax}
                         svg={{
-                            fill: 'grey',
+                            fill: styleColors.tNormal,
                             fontSize: 14,
                             marginLeft: 5,
                         }}
@@ -111,7 +114,7 @@ class PlotMulti extends React.PureComponent {
                                 xAccessor={ ({ item }) => item.x }
                                 formatLabel={ (value, index) => (Math.round(value * 10) % 20 === 0) ? (Math.round(value * 100) / 100).toFixed(1): null }
                                 contentInset={{ left: 25, right: 25 }}
-                                svg = {{fontSize:14, fill:'grey'}}
+                                svg = {{fontSize:14, fill: styleColors.tNormal}}
                             /></View>) :
                             <></>
                             }

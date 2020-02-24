@@ -27,6 +27,7 @@ const colors = {
   s50: "#fcfae4",
   surface: "#121212",
   container: "#222222",
+  c1dp: "#191919",
   header: "#333333",
   tEmphasis: "#dddddd",
   tNormal: "#aaaaaa",

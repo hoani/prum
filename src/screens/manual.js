@@ -16,9 +16,7 @@ import { Icon } from 'react-native-elements';
 import PlotMulti from '../charts/PlotMulti';
 import ProgressCircle from '../charts/ProgressCircle';
 
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
+import { styles, colors } from "../style/style.js";
 
 import {Packet} from 'leap-protocol';
 import {AppContext} from '../state/appContext';
@@ -59,15 +57,17 @@ export default class ManualScreen extends React.Component {
               </View>
 
               <View style={{flex:1, flexDirection:'row'}}>
-                <View style={{flex:5, flexDirection:'column'}}>
+                <View style={{flex:5, flexDirection:'column', backgroundColor: colors.container}}>
                   <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
-                    <View style={{flex:1, backgroundColor:"#eee"}} />
+                    <View style={{flex:1}} />
                     <View style={{flex:1}} >
                     <Icon
                         raised
                         name='angle-double-up'
                         type='font-awesome'
-                        color='#f50'
+                        color={colors.p200}
+                        reverseColor={colors.tOnPrimary}
+                        reverse={true}
                         onPress={() => {
                           let packet = new Packet(
                             'set',
@@ -78,7 +78,7 @@ export default class ManualScreen extends React.Component {
                         }}
                       />
                     </View>
-                    <View style={{flex:1, backgroundColor:"#eee"}} />
+                    <View style={{flex:1}} />
                   </View>
                   <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
                   <View style={{flex:1}} >
@@ -86,7 +86,9 @@ export default class ManualScreen extends React.Component {
                         raised
                         name='angle-double-left'
                         type='font-awesome'
-                        color='#f50'
+                        color={colors.p200}
+                        reverseColor={colors.tOnPrimary}
+                        reverse={true}
                         onPress={() => {
                           let packet = new Packet(
                             'set',
@@ -97,12 +99,14 @@ export default class ManualScreen extends React.Component {
                         }}
                       />
                   </View>
-                  <View style={{flex:1, backgroundColor:"#eee"}}>
+                  <View style={{flex:1}}>
                     <Icon
                       raised
                       name='stop-circle'
                       type='font-awesome'
-                      color='#f50'
+                      color={colors.c1dp}
+                      reverseColor={colors.tOnPrimary}
+                      reverse={true}
                       onPress={() => {
                         let packet = new Packet(
                           'set',
@@ -117,7 +121,9 @@ export default class ManualScreen extends React.Component {
                         raised
                         name='angle-double-right'
                         type='font-awesome'
-                        color='#f50'
+                        color={colors.p200}
+                        reverseColor={colors.tOnPrimary}
+                        reverse={true}
                         onPress={() => {
                           let packet = new Packet(
                             'set',
@@ -130,13 +136,15 @@ export default class ManualScreen extends React.Component {
                   </View>
                   </View>
                   <View style={{flex:1, alignItems:'stretch', flexDirection:'row'}}>
-                    <View style={{flex:1, backgroundColor:"#eee"}} />
+                    <View style={{flex:1}} />
                       <View style={{flex:1}} >
                         <Icon
                             raised
                             name='angle-double-down'
                             type='font-awesome'
-                            color='#f50'
+                            color={colors.p200}
+                            reverseColor={colors.tOnPrimary}
+                            reverse={true}
                             onPress={() => {
                               let packet = new Packet(
                                 'set',
@@ -147,7 +155,7 @@ export default class ManualScreen extends React.Component {
                             }}
                           />
                       </View>
-                    <View style={{flex:1, backgroundColor:"#eee"}} />
+                    <View style={{flex:1}} />
                   </View>
                 </View>
                 <View style={{flex:1}} />
@@ -170,42 +178,3 @@ export default class ManualScreen extends React.Component {
 };
 
 ManualScreen.contextType = AppContext;
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
