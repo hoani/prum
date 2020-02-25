@@ -121,7 +121,7 @@ class ProgressCircle extends React.PureComponent {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    let storedData = state.current_data;
+    let storedData = state.data.current;
     return {
         rawValue: storedData[ownProps.path],
     };

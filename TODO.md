@@ -40,6 +40,9 @@
   [] Consider the 1, 1.5, 2, 3, 5, 8 scaling strategy
 [] Other things
   [] Add leetware logo
+[] Redux tidy up
+  [X] Refactor the reducer so that we can split state among reducers
+  [] Make `new_data` = `newData`
 
 
 

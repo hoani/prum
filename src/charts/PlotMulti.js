@@ -139,7 +139,7 @@ const DEFAULT_COLORS = [
 ];
 
 mapStateToProps = (state, ownProps) => {
-    let storedData = state.plot_data;
+    let storedData = state.data.plot;
     let plot_data = {};
 
     let yMax = null;

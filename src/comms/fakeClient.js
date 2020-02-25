@@ -53,7 +53,7 @@ export default class Client {
       }
 
       this.store.dispatch({
-        type: 'new_data',
+        type: 'NEW_DATA',
         key: key,
         value: base + noise
       });
