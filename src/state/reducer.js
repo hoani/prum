@@ -1,4 +1,6 @@
 import { combineReducers } from "redux"
+import { newDataReducer } from "../state/dataReducers"
+
 
 export const NEW_DATA = 'NEW_DATA';
 export const CONNECTED = 'connected';
@@ -12,39 +14,6 @@ function createReducer(initialState, handlers) {
       return state
     }
   }
-}
-
-function newDataReducer(dataState, action) {
-  let new_data;
-  let x;
-  if ((action.key in dataState.plot) == true) {
-    new_data = dataState.plot[action.key].slice(0);
-    x = new_data[new_data.length - 1].x + 0.2;
-  }
-  else {
-    new_data = [];
-    x = 0.0;
-  }
-
-  if (new_data.length > 50) {
-    new_data.shift(1);
-  }
-  new_data.push( {
-    x: x,
-    y: action.value
-  });
-
-
-  return ({
-      plot: {
-        ...dataState.plot,
-        [action.key]: new_data
-      },
-      current: {
-        ...dataState.current,
-        [action.key]: action.value
-      }
-  });
 }
 
 const dataReducer = createReducer({ plot: {}, current: {} }, {
@@ -65,7 +34,6 @@ export function newData(value, key) {
     value: value
   };
 }
-
 
 export function connected(isConnected) {
   console.log('.connected')
