@@ -5,15 +5,15 @@ import PlotMulti from './PlotMulti';
 
 class PlotSingle extends React.PureComponent {
     static defaultProps = {
-        show_x: false,
-        show_y: true,
+        showX: false,
+        showY: true,
         path: "",
         title: "",
         label: ""
     };
 
     render() {
-        let { path, show_x, show_y, title, label } = this.props;
+        let { path, showX, showY, title, label } = this.props;
         let labels
         if (label == "") {
             labels = [];
@@ -23,7 +23,7 @@ class PlotSingle extends React.PureComponent {
         }
         return (
             <View>
-                <PlotMulti title={title} paths={[path]} show_x={show_x} show_y={show_y} labels={labels}/>
+                <PlotMulti title={title} paths={[path]} showX={showX} showY={showY} labels={labels}/>
             </View>
         );
     }

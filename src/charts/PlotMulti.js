@@ -15,9 +15,9 @@ import { colors as styleColors } from "../style/style.js";
 class PlotMulti extends React.PureComponent {
 
     render() {
-        let { title, plot_data, paths, colors, labels, height } = this.props;
+        let { title, plotData, paths, colors, labels, height } = this.props;
         let { yMin, yMax } = this.props;
-        let { show_x, show_y } = this.props;
+        let { showX, showY } = this.props;
 
         const PlotLine = ({ line, color }) => (
             <Path
@@ -29,8 +29,8 @@ class PlotMulti extends React.PureComponent {
         );
 
         let axis_data = Array();
-        if (paths.length > 0 && paths[0] in plot_data) {
-            axis_data = plot_data[paths[0]];
+        if (paths.length > 0 && paths[0] in plotData) {
+            axis_data = plotData[paths[0]];
         }
 
         return (
@@ -65,7 +65,7 @@ class PlotMulti extends React.PureComponent {
 
                 <View style={ { flex: 1, flexGrow: 1, flexDirection: 'row' } }>
                     {
-                    show_y ?
+                    showY ?
                     <YAxis
                         style={{paddingLeft:5}}
                         data = {[yMin, yMax]}
@@ -85,7 +85,7 @@ class PlotMulti extends React.PureComponent {
                     <View style={{ flex: 1, marginLeft: 10 }}>
                         {
                         paths.map((path, index) => {
-                            let data = (path in plot_data) ? plot_data[path] : [];
+                            let data = (path in plotData) ? plotData[path] : [];
                             return (
                                 <AreaChart
                                     key={path}
@@ -105,7 +105,7 @@ class PlotMulti extends React.PureComponent {
                             )
                         })
                         }
-                            { (show_x && axis_data.length > 0) ? (
+                            { (showX && axis_data.length > 0) ? (
                                 <View style={{justifyContent: "flex-end", height:"100%"}}>
                             <XAxis
                                 style={{ marginHorizontal: -10, marginTop: 5}}
@@ -140,7 +140,7 @@ const DEFAULT_COLORS = [
 
 mapStateToProps = (state, ownProps) => {
     let storedData = state.data.plot;
-    let plot_data = ownProps.plot_data;
+    let plotData = ownProps.plotData;
 
     let yData = [];
 
@@ -156,8 +156,8 @@ mapStateToProps = (state, ownProps) => {
 
     for (path of ownProps.paths) {
         if (path in storedData) {
-            if (path in plot_data) {
-                if (storedData[path] != plot_data[path]) {
+            if (path in plotData) {
+                if (storedData[path] != plotData[path]) {
                     update = true;
                 }
             }
@@ -165,13 +165,13 @@ mapStateToProps = (state, ownProps) => {
                 update = true;
             }
             if (update) {
-                plot_data[path] = storedData[path];
-                const yValues = plot_data[path].map(item => item.y);
+                plotData[path] = storedData[path];
+                const yValues = plotData[path].map(item => item.y);
                 yData = yData.concat(yValues);
             }
         }
         else {
-            plot_data[path] = [{x: 0, y: 0}];
+            plotData[path] = [{x: 0, y: 0}];
         }
     }
 
@@ -191,7 +191,7 @@ mapStateToProps = (state, ownProps) => {
         return {
             yMax,
             yMin,
-            plot_data,
+            plotData,
         };
     }
     else {
@@ -209,11 +209,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
 ConnectedPlotMulti = connect(mapStateToProps, mapDispatchToProps, mergeProps)(PlotMulti);
 ConnectedPlotMulti.defaultProps = {
-    plot_data: [],
+    plotData: [],
     paths: [],
     colors: [],
-    show_x: true,
-    show_y: true,
+    showX: true,
+    showY: true,
     title: "",
     labels: [],
     height: 200,

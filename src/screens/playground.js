@@ -12,6 +12,7 @@ import { styles } from "../style/style.js";
 
 import Image from 'react-native-scalable-image';
 
+import PlotSingle from '../charts/PlotSingle';
 import PlotMulti from '../charts/PlotMulti';
 import Plot3DOF from '../charts/Plot3DOF';
 import ProgressCircle from '../charts/ProgressCircle';
@@ -67,13 +68,13 @@ export default class PlaygroundScreen extends React.Component {
                 </View>
               </View>
               <View style={{flex:3}}>
-                {/* <PlotSingle path = "imu/gyros/x" show_x = {false} /> */}
+                <PlotSingle path = "imu/gyros/x" showX = {false} />
                 <PlotMulti paths = {["imu/gyros/y", "imu/gyros/z"]} colors = {['#8a2be2', '#ff1493']}/>
                 <Plot3DOF
                   title = "acceleration"
                   paths = {["imu/accel/x", "imu/accel/y","imu/accel/z"]}
                   labels =  {["x", "y", "z"]}
-                  show_y = {true}
+                  showY = {true}
                 />
               </View>
               <View style={{justifyContent:'center', alignItems:'center'}}>

@@ -5,18 +5,18 @@ import PlotMulti from './PlotMulti';
 
 class Plot3DOF extends React.PureComponent {
     static defaultProps = {
-        show_x: false,
-        show_y: true,
+        showX: false,
+        showY: true,
         paths: ["", "", ""],
         title: "",
         labels: []
     };
 
     render() {
-        let { paths, show_x, show_y, title, labels } = this.props;
+        let { paths, showX, showY, title, labels } = this.props;
         return (
             <View>
-                <PlotMulti title={title} paths={paths} show_x={show_x} show_y={show_y} labels={labels}/>
+                <PlotMulti title={title} paths={paths} showX={showX} showY={showY} labels={labels}/>
             </View>
         );
     }
