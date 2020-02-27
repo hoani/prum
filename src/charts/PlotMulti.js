@@ -140,9 +140,7 @@ const DEFAULT_COLORS = [
 
 mapStateToProps = (state, ownProps) => {
     let storedData = state.data.plot;
-    let plot_data = {};
-
-
+    let plot_data = ownProps.plot_data;
 
     let yData = [];
 
@@ -158,8 +156,8 @@ mapStateToProps = (state, ownProps) => {
 
     for (path of ownProps.paths) {
         if (path in storedData) {
-            if (path in ownProps.plot_data) {
-                if (storedData[path].length !== ownProps.plot_data[path].length) {
+            if (path in plot_data) {
+                if (storedData[path] != plot_data[path]) {
                     update = true;
                 }
             }
@@ -168,8 +166,6 @@ mapStateToProps = (state, ownProps) => {
             }
             if (update) {
                 plot_data[path] = storedData[path];
-                console.log(path, plot_data[path].length);
-
                 const yValues = plot_data[path].map(item => item.y);
                 yData = yData.concat(yValues);
             }
@@ -193,13 +189,14 @@ mapStateToProps = (state, ownProps) => {
         }
 
         return {
-            ...ownProps,
             yMax,
             yMin,
             plot_data,
         };
     }
-    return ownProps;
+    else {
+        return {};
+    }
 };
 
 const mapDispatchToProps = {

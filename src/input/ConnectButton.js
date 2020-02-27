@@ -13,15 +13,13 @@ class ConnectButton extends React.PureComponent {
         onPressDisconnect:()=>{},
     };
 
-
-
     render() {
         let {iconType, title, style, isConnected} = this.props;
-        let iconName = "wifi-off";
+        let iconName = "wifi";
 
         if (isConnected) {
             title = title.replace("Connect", "Disconnect");
-            iconName = "wifi";
+            iconName = "wifi-off";
         }
         else {
             title = title.replace("Disconnect", "Connect");
@@ -29,13 +27,14 @@ class ConnectButton extends React.PureComponent {
 
         let onPress = () => {
             let { isConnected, onPressDisconnect, onPressConnect } = this.props;
+
             if (isConnected) {
                 onPressDisconnect();
             }
             else {
                 onPressConnect();
             }
-        }
+        };
         return (
             <>
                 <IconButton
@@ -52,7 +51,7 @@ class ConnectButton extends React.PureComponent {
 const mapStateToProps = (state) => {
     let isConnected = state.connect.isConnected;
     return {
-        isConnected
+        isConnected,
     };
 };
 

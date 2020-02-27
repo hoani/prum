@@ -17,12 +17,10 @@
   [X] Add text option
   [X] If no icon is defined, make it default to text progress circle
   [X] Tidy up progress bar defaults
-[] Connect page
+[X] Connect page
   [X] pass all screens to this page from the app file as a config
   [X] Create a "connected" redux action and state
-  [] Disable all subpages until connected
   [X] Switch connect button to a disconnect button when connected
-  [] Disable all subpages after disconnect
 [X] UI Layout
   [X] Checkout https://facebook.github.io/react-native/docs/navigation
   [X] Work through the fundamentals: https://reactnavigation.org/docs/en/navigating.html
