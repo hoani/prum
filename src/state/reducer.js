@@ -1,9 +1,10 @@
 import { combineReducers } from "redux"
 import { newDataReducer } from "../state/dataReducers"
+import { isConnectedReducer } from "../state/connectReducers"
 
 
 export const NEW_DATA = 'NEW_DATA';
-export const CONNECTED = 'connected';
+export const CONNECTED = 'CONNECTED';
 
 
 function createReducer(initialState, handlers) {
@@ -20,8 +21,13 @@ const dataReducer = createReducer({ plot: {}, current: {} }, {
   NEW_DATA: newDataReducer,
 });
 
+const connectReducer = createReducer({ isConnected: false }, {
+  CONNECTED: isConnectedReducer,
+});
+
 const reducer = combineReducers({
-  data: dataReducer
+  data: dataReducer,
+  connect: connectReducer,
 });
 
 export default reducer;

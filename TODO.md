@@ -19,9 +19,9 @@
   [X] Tidy up progress bar defaults
 [] Connect page
   [X] pass all screens to this page from the app file as a config
-  [] Create a "connected" redux action and state
+  [X] Create a "connected" redux action and state
   [] Disable all subpages until connected
-  [] Switch connect button to a disconnect button when connected
+  [X] Switch connect button to a disconnect button when connected
   [] Disable all subpages after disconnect
 [X] UI Layout
   [X] Checkout https://facebook.github.io/react-native/docs/navigation
@@ -43,6 +43,9 @@
 [] Redux tidy up
   [X] Refactor the reducer so that we can split state among reducers
   [] Make `new_data` = `newData`
+
+[] Every dispatch rerenders all modules - we should look at a batch new data dispatch instead to deal with
+  all data items at once
 
 
 

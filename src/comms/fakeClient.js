@@ -1,3 +1,5 @@
+import { connected } from '../state/reducer';
+
 export default class Client {
   constructor(port = 11337, host, codec, store) {
     this.interval = null;
@@ -29,12 +31,20 @@ export default class Client {
 
   connect(options) {
     this.interval = setInterval(() => this.newData(), ms = 200);
+    this.store.dispatch({
+      type: 'CONNECTED',
+      isConnected: true
+    });
     return (true);
   }
 
   disconnect() {
     if (this.interval !== null) {
       clearInterval(this.interval);
+      this.store.dispatch({
+        type: 'CONNECTED',
+        isConnected: false
+      });
       this.interval = null;
     }
   }

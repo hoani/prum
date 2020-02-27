@@ -14,6 +14,7 @@ import { styles, colors } from "../style/style.js";
 import { Icon, Button } from 'react-native-elements';
 
 import IconButton from '../input/IconButton';
+import ConnectButton from '../input/ConnectButton';
 
 
 import {AppContext} from '../state/appContext';
@@ -66,14 +67,14 @@ export default class ConnectScreen extends React.Component {
                   style={styles.textInput}
                   value='192.168.1.13'
                 />
-                <IconButton
+                <ConnectButton
                   style={{paddingTop:12}}
-                  iconName="wifi"
-                  iconType="font-awesome"
-                  iconColor="#fff"
                   title="Connect Wifi"
-                  onPress={() => {
+                  onPressConnect={() => {
                     client.connect({localAddress: 'localhost'});
+                  }}
+                  onPressDisconnect={() => {
+                    client.disconnect();
                   }}
                 />
               </View>

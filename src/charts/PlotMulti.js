@@ -142,8 +142,7 @@ mapStateToProps = (state, ownProps) => {
     let storedData = state.data.plot;
     let plot_data = {};
 
-    let yMax = null;
-    let yMin = null;
+
 
     let yData = [];
 
@@ -157,31 +156,42 @@ mapStateToProps = (state, ownProps) => {
         }
     }
 
-
-
     for (path of ownProps.paths) {
         if (path in storedData) {
-            update = true;
-            plot_data[path] = storedData[path];
+            if (path in ownProps.plot_data) {
+                if (storedData[path].length !== ownProps.plot_data[path].length) {
+                    update = true;
+                }
+            }
+            else {
+                update = true;
+            }
+            if (update) {
+                plot_data[path] = storedData[path];
+                console.log(path, plot_data[path].length);
 
-            const yValues = plot_data[path].map(item => item.y);
-            yData = yData.concat(yValues);
+                const yValues = plot_data[path].map(item => item.y);
+                yData = yData.concat(yValues);
+            }
         }
         else {
             plot_data[path] = [{x: 0, y: 0}];
         }
     }
 
-    if (yData.length == 0) {
-        yMin = 0.0;
-        yMax = 0.0;
-    }
-    else {
-        yMax = Math.max(...yData);
-        yMin = Math.min(...yData);
-    }
-
     if (update) {
+        let yMax = null;
+        let yMin = null;
+
+        if (yData.length == 0) {
+            yMin = 0.0;
+            yMax = 0.0;
+        }
+        else {
+            yMax = Math.max(...yData);
+            yMin = Math.min(...yData);
+        }
+
         return {
             ...ownProps,
             yMax,
