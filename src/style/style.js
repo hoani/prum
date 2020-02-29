@@ -32,6 +32,7 @@ const colors = {
   s50: "#fcfae4",
   surface: "#121212",
   container: "#222222",
+  disabled: "#555555",
   c1dp: "#191919",
   header: "#333333",
   tEmphasis: "#dddddd",
@@ -82,7 +83,7 @@ const inputStyles = StyleSheet.create({
 const styles = {...containerStyles, ...inputStyles};
 
 
-// React Navigation Theme
+// React Elements Theme
 const theme = {
   Button: {
     titleStyle: {
@@ -93,6 +94,12 @@ const theme = {
     },
     buttonStyle: {
       backgroundColor: colors.p200
+    },
+    disabledStyle: {
+      backgroundColor: colors.disabled,
+    },
+    disabledTitleStyle: {
+      color: colors.tOnPrimary,
     }
   },
 };

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 class ConnectButton extends React.PureComponent {
     static defaultProps = {
+        disabled: true,
         iconType:"feather",
         title:"Connect Wifi",
         isConnected: false,
@@ -13,7 +14,7 @@ class ConnectButton extends React.PureComponent {
     };
 
     render() {
-        let {iconType, title, style, isConnected} = this.props;
+        let {iconType, title, style, isConnected, disabled} = this.props;
         let iconName = "wifi";
 
         if (isConnected) {
@@ -42,6 +43,7 @@ class ConnectButton extends React.PureComponent {
                     title = {title}
                     onPress = {onPress}
                     style = {style}
+                    disabled={this.props.disabled}
                   />
             </>
         );

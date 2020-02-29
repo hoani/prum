@@ -6,6 +6,7 @@ class IconButton extends React.PureComponent {
         iconName:"glass",
         iconType:"font-awesome",
         title:"title not found",
+        disabled:false,
         onPress:()=>{},
     };
 
@@ -22,6 +23,7 @@ class IconButton extends React.PureComponent {
                     title={this.props.title}
                     onPress={this.props.onPress}
                     style={this.props.style}
+                    disabled={this.props.disabled}
                   />
             </>
         );

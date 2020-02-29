@@ -21,7 +21,13 @@ class TcpConnect extends React.PureComponent {
 
   render() {
     let {address, client} = this.props;
-    console.log(address)
+    let disabled = false;
+
+    let reTcpIp = /^(\d{1,3}\.){3}\d{1,3}$/;
+
+    if (reTcpIp.test(address) == false) {
+      disabled = true;
+    }
 
     return (
       <>
@@ -33,17 +39,18 @@ class TcpConnect extends React.PureComponent {
           defaultValue={address}
           onChangeText={
             (value) => {
-              input("tcp/address", value);
+              this.props.input("tcp/address", value);
             }
           }
         />
         <View style = {{paddingTop: 12}}>
           <ConnectButton
+            disabled = {disabled}
             style={{paddingTop:12}}
             title="Connect Wifi"
             onPressConnect={() => {
               client.connect({localAddress: address});
-              console.log(address)
+              
             }}
             onPressDisconnect={() => {
               client.disconnect();
@@ -54,15 +61,19 @@ class TcpConnect extends React.PureComponent {
     );
   }
 }
-const mapStateToProps = (state) => {
-  console.log(state.input) 
+const mapStateToProps = (state, ownProps) => {
   if ("tcp/address" in state.input) {
-    console.log(state.input["tcp/address"])
-    return {
-      address: state.input["tcp/address"],
-    };
+    if (state.input["tcp/address"] != ownProps.address) {
+      return {
+        address: state.input["tcp/address"],
+      };
+    }
   }
   return {};
 };
 
-export default connect(mapStateToProps)(TcpConnect);
+const mapDispatchToProps = {
+  input
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TcpConnect);
