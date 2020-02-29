@@ -1,5 +1,5 @@
 import tcpSockets from 'react-native-tcp-socket';
-import Packet from 'leap-protocol';
+import {Packet} from 'leap-protocol';
 
 export default class Client {
   constructor(port = 11337, host, codec, store) {
@@ -12,15 +12,24 @@ export default class Client {
   }
 
   connect(options) {
-    this.client = tcpSockets.createConnection({...options, port: this.port, host: this.host});
+    console.log(options)
+    this.client = tcpSockets.createConnection({ port: this.port, ...options});
     this.client.on('data', this.data.bind(this));
     this.client.on('error', this.error.bind(this));
+    this.store.dispatch({
+      type: 'CONNECTED',
+      isConnected: true
+    });
     return (this.client !== null);
   }
 
   disconnect() {
     this.client.destroy();
     this.client = null;
+    this.store.dispatch({
+      type: 'CONNECTED',
+      isConnected: false
+    });
   }
 
   send(packets) {
@@ -41,7 +50,7 @@ export default class Client {
       const unpacked = this.codec.unpack(packet);
       for (key of Object.keys(unpacked)) {
         this.store.dispatch({
-          type: 'new_data',
+          type: 'NEW_DATA',
           key: key,
           value: unpacked[key]
         });

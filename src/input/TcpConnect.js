@@ -49,7 +49,7 @@ class TcpConnect extends React.PureComponent {
             style={{paddingTop:12}}
             title="Connect Wifi"
             onPressConnect={() => {
-              client.connect({localAddress: address});
+              client.connect({ host: address});
               
             }}
             onPressDisconnect={() => {

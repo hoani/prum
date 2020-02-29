@@ -102,6 +102,11 @@ const theme = {
       color: colors.tOnPrimary,
     }
   },
+  Slider: {
+    minimumTrackTintColor: colors.p100,
+    maximumTrackTintColor: colors.disabled,
+    thumbTintColor: colors.p300,
+  }
 };
 
 const navbarStyle = {
