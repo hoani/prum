@@ -15,7 +15,7 @@ import { ThemeProvider } from 'react-native-elements';
 import { createStore } from 'redux';
 import { Provider} from 'react-redux';
 
-//import Client from './src/comms/tcpClient';
+// import Client from './src/comms/fakeClient';
 import Client from './src/comms/tcpClient';
 import reducer from './src/state/reducer';
 import {Codec} from 'leap-protocol';

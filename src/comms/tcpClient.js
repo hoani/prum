@@ -46,16 +46,18 @@ export default class Client {
   data(data) {
     this.bytes += data;
     [this.bytes, packets] = this.codec.decode(this.bytes);
-    for (packet of packets) {
+    for (let packet of packets) {
+      const newData = {}
       const unpacked = this.codec.unpack(packet);
-      for (key of Object.keys(unpacked)) {
-        this.store.dispatch({
-          type: 'NEW_DATA',
-          key: key,
-          value: unpacked[key]
-        });
+      for (const key in unpacked) {
+        newData[key] = unpacked[key];
       }
+      this.store.dispatch({
+        type: 'NEW_DATA',
+        data: newData,
+      });
     }
+    
   }
 
   error(error) {

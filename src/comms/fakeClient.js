@@ -53,6 +53,7 @@ export default class Client {
   }
 
   newData() {
+    let newData = {}
     for (key of Object.keys(this.items)) {
       const item = this.items[key];
       const base = item.profile[item.i];
@@ -62,12 +63,12 @@ export default class Client {
         item.i = 0;
       }
 
-      this.store.dispatch({
-        type: 'NEW_DATA',
-        key: key,
-        value: base + noise
-      });
+      newData[key] = base + noise;
     }
+    this.store.dispatch({
+      type: 'NEW_DATA',
+      data: newData,
+    });
   }
 }
 

@@ -1,34 +1,42 @@
 function newDataReducer(dataState, action) {
   let newData;
   let x;
-  if ((action.key in dataState.plot) == true) {
-    newData = dataState.plot[action.key].slice(0);
-    x = newData[newData.length - 1].x + 0.2;
-  }
-  else {
-    newData = [];
-    x = 0.0;
-  }
+  let items = action.data;
 
-  if (newData.length > 50) {
-    newData.shift(1);
-  }
-  newData.push( {
-    x: x,
-    y: action.value
-  });
+  let newState = dataState;
 
+  for (const key in items) {
+    if (key in dataState.plot) {
+      newData = dataState.plot[key].slice(0);
+      x = newData[newData.length - 1].x + 0.2;
+    }
+    else {
+      newData = [];
+      x = 0.0;
+    }
 
-  return ({
+    if (newData.length > 50) {
+      newData.shift(1);
+    }
+    newData.push( {
+      x: x,
+      y: items[key]
+    });
+
+    newState = {
       plot: {
-        ...dataState.plot,
-        [action.key]: newData
+        ...newState.plot,
+        [key]: newData,
       },
       current: {
-        ...dataState.current,
-        [action.key]: action.value
+        ...newState.current,
+        [key]: items[key],
       }
-  });
+    }
+  }
+
+  return newState;
 }
+
 
 export { newDataReducer };

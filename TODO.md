@@ -4,9 +4,10 @@
 
 [] Every dispatch rerenders all modules - we should look at a batch new data dispatch instead to deal with
   all data items at once
+  [] Resolve the plotting problem
 
-[] Connect GUI
-  [] Link text input to connect button
+[X] Connect GUI
+  [X] Link text input to connect button
     - add to redux a set of input states, in this case:
       input: {
         tcp/addr: "", 
