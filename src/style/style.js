@@ -1,5 +1,10 @@
-import { StyleSheet } from 'react-native';
-import { completeHandlerIOS } from 'react-native-fs';
+import React from 'react';
+import {
+  View,
+  StyleSheet,
+} from 'react-native';
+
+import Image from 'react-native-scalable-image';
 
 
 const colors = {
@@ -80,7 +85,6 @@ const styles = {...containerStyles, ...inputStyles};
 // React Navigation Theme
 const theme = {
   Button: {
-
     titleStyle: {
       color: colors.tOnPrimary,
     },
@@ -111,8 +115,18 @@ const navbarStyle = {
   ),
   tabBarOptions: {
       activeTintColor: '#cd077d',
-
   },
+  headerRight: () => (
+    <View style={{flex: 1, flexDirection: 'row', alignItems:'center'}}>
+      <Image
+        style={{marginRight:8}}
+        tintColor={colors.tDisable}
+        resizeMode="center"
+        width={48}
+        source={require("../../images/logo.png")}
+      />
+    </View>
+  ),
 }
 
 

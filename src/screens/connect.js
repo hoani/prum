@@ -9,6 +9,8 @@ import {
   FlatList,
 } from 'react-native';
 
+import Image from 'react-native-scalable-image';
+
 import { styles, colors } from "../style/style.js";
 
 import { Icon, Button } from 'react-native-elements';
@@ -23,30 +25,8 @@ export default class ConnectScreen extends React.Component {
 
   static navigationOptions = {
     title: 'Connect',
-    headerRight: () => (
-      <View style={{flex: 1, flexDirection: 'row'}}>
-      <Button
-        onPress={() => alert('This is a button!')}
-        title="Info"
-        color="#333"
-        backgroundColor="#bbb"
-      />
-      <Button
-        onPress={() => alert('This is a button!')}
-        title="Info"
-        color="#333"
-        backgroundColor="#bbb"
-      />
-      <Icon
-        name='heartbeat'
-        type='font-awesome'
-        color='#f50'
-        onPress={() => console.log('hello')} />
-      <Icon
-  name='rowing' />
-      </View>
-    ),
   };
+
   render() {
     let {uiScreens, client} = this.context;
     return (
@@ -67,66 +47,46 @@ export default class ConnectScreen extends React.Component {
                   style={styles.textInput}
                   value='192.168.1.13'
                 />
-                <ConnectButton
-                  style={{paddingTop:12}}
-                  title="Connect Wifi"
-                  onPressConnect={() => {
-                    client.connect({localAddress: 'localhost'});
-                  }}
-                  onPressDisconnect={() => {
-                    client.disconnect();
-                  }}
-                />
+                <View style = {{paddingTop: 12}}>
+                  <ConnectButton
+                    style={{paddingTop:12}}
+                    title="Connect Wifi"
+                    onPressConnect={() => {
+                      client.connect({localAddress: 'localhost'});
+                    }}
+                    onPressDisconnect={() => {
+                      client.disconnect();
+                    }}
+                  />
+                </View> 
               </View>
 
               <View style={styles.sectionContainer}>
                 <Text style={styles.sectionDescription}>
-                  Connect Bluetooth
+                    Interfaces:
                 </Text>
-                <TextInput
-                  style={styles.textInput}
-                  value='192.168.1.13'
-                />
-                <IconButton
-                  buttonStyle={styles.button}
-                  iconName="bluetooth"
-                  iconType="font-awesome"
-                  title="Connect Bluetooth"
-                  onPress={() => {
-                    client.connect({localAddress: 'localhost'});
-                  }}
-                />
+                { 
+                  uiScreens.map((item) => {
+                    return (
+                      <View style = {{paddingTop: 12}} key={item.title + "view"}>
+                        <IconButton
+                          key={item.title}
+                          iconName={item.iconName}
+                          iconType="font-awesome"
+                          iconColor="#fff"
+                          title={item.title}
+                          onPress={() => {
+                            this.props.navigation.navigate(item.key);
+                          }}
+                        />
+                      </View>
+                    );
+                  })
+                }
               </View>
-
             </View>
           </ScrollView>
         </SafeAreaView>
-
-        <View style={{flex:1, ...styles.body}} >
-        <SafeAreaView style={{flex: 1}}
-          style={styles.sectionContainer}
-        >
-          <Text style={styles.sectionDescription}>
-            Interfaces:
-          </Text>
-
-            <FlatList
-              data = {uiScreens}
-              renderItem={({item}) =>
-                <IconButton
-                  style={{paddingTop:12}}
-                  iconName={item.iconName}
-                  iconType="font-awesome"
-                  iconColor="#fff"
-                  title={item.title}
-                  onPress={() => {
-                    this.props.navigation.navigate(item.key);
-                  }}
-                />
-              }
-            />
-        </SafeAreaView>
-        </View>
       </>
     );
   }

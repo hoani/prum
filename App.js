@@ -60,16 +60,6 @@ export default class App extends React.Component {
     }
   }
 
-  static navigationOptions = {
-    headerRight: () => (
-      <Button
-        onPress={() => alert('This is a button!')}
-        title="Info"
-        color="#fff"
-      />
-    ),
-  };
-
   render() {
     let uiScreens = [
       {
