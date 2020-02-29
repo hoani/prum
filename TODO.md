@@ -9,15 +9,11 @@
   [] Link text input to connect button
     - add to redux a set of input states, in this case:
       input: {
-        tcp_addr: "", 
-        control: {
-          pid: {
-            kp: "", 
-            ki: "", 
-            kd: "",
-            setpoint: "", 
-          }
-        }
+        tcp/addr: "", 
+        control/pid/kp: "",
+        control/pid/ki: "",
+        control/pid/kd: "",
+        control/pid/setpoint: "",
       }
 
 [] Add health GUI

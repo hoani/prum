@@ -2,7 +2,6 @@ import React from 'react';
 import IconButton from '../input/IconButton';
 
 import { connect } from 'react-redux';
-import { connected } from '../state/reducer';
 
 class ConnectButton extends React.PureComponent {
     static defaultProps = {

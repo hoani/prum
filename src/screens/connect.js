@@ -11,15 +11,16 @@ import {
 
 import Image from 'react-native-scalable-image';
 
-import { styles, colors } from "../style/style.js";
+import { styles, colors } from "../style/style";
 
-import { Icon, Button } from 'react-native-elements';
+import {input} from "../state/reducer"
 
 import IconButton from '../input/IconButton';
 import ConnectButton from '../input/ConnectButton';
 
 
 import {AppContext} from '../state/appContext';
+import TcpConnect from '../input/TcpConnect';
 
 export default class ConnectScreen extends React.Component {
 
@@ -40,6 +41,9 @@ export default class ConnectScreen extends React.Component {
             <View style={styles.body}>
 
               <View style={styles.sectionContainer}>
+                <TcpConnect client={client}/>
+              </View>
+              {/* <View style={styles.sectionContainer}>
                 <Text style={styles.sectionDescription}>
                   Connect Wifi
                 </Text>
@@ -59,7 +63,7 @@ export default class ConnectScreen extends React.Component {
                     }}
                   />
                 </View> 
-              </View>
+              </View> */}
 
               <View style={styles.sectionContainer}>
                 <Text style={styles.sectionDescription}>
@@ -92,4 +96,5 @@ export default class ConnectScreen extends React.Component {
   }
 };
 ConnectScreen.contextType = AppContext;
+
 
