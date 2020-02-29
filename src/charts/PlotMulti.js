@@ -107,16 +107,17 @@ class PlotMulti extends React.PureComponent {
                         }
                             { (showX && axis_data.length > 0) ? (
                                 <View style={{justifyContent: "flex-end", height:"100%"}}>
-                            <XAxis
-                                style={{ marginHorizontal: -10, marginTop: 5}}
-                                data={ axis_data }
-                                yAccessor={ ({ item }) => item.y }
-                                xAccessor={ ({ item }) => item.x }
-                                formatLabel={ (value, index) => (Math.round(value * 10) % 20 === 0) ? (Math.round(value * 100) / 100).toFixed(1): null }
-                                contentInset={{ left: 25, right: 25 }}
-                                svg = {{fontSize:14, fill: styleColors.tNormal}}
-                            /></View>) :
-                            <></>
+                                    <XAxis
+                                        style={{ marginHorizontal: -10, marginTop: 5}}
+                                        data={ axis_data }
+                                        yAccessor={ ({ item }) => item.y }
+                                        xAccessor={ ({ item }) => item.x }
+                                        formatLabel={ (value, index) => (Math.round(value * 10) % 20 === 0) ? (Math.round(value * 100) / 100).toFixed(1): null }
+                                        contentInset={{ left: 25, right: 25 }}
+                                        svg = {{fontSize:14, fill: styleColors.tNormal}}
+                                    />
+                                </View>) :
+                                <></>
                             }
                     </View>
                 </View>
@@ -164,11 +165,10 @@ mapStateToProps = (state, ownProps) => {
             else {
                 update = true;
             }
-            if (update) {
-                plotData[path] = storedData[path];
-                const yValues = plotData[path].map(item => item.y);
-                yData = yData.concat(yValues);
-            }
+            update = true;
+            plotData[path] = storedData[path];
+            const yValues = plotData[path].map(item => item.y);
+            yData = yData.concat(yValues);
         }
         else {
             plotData[path] = [{x: 0, y: 0}];
@@ -195,7 +195,7 @@ mapStateToProps = (state, ownProps) => {
         };
     }
     else {
-        return {};
+        return ownProps;
     }
 };
 

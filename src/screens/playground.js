@@ -6,9 +6,10 @@ import {
   View,
   Text,
   StatusBar,
+  Switch
 } from 'react-native';
 
-import { styles } from "../style/style.js";
+import { styles, colors } from "../style/style.js";
 
 import Image from 'react-native-scalable-image';
 
@@ -45,7 +46,7 @@ export default class PlaygroundScreen extends React.Component {
                 <Text style={styles.sectionTitle}>Component Playground</Text>
               </View>
 
-              <View style={{flex:3, flexDirection: "row"}} >
+              <View style={{flex:3, flexDirection: "row", ...styles.sectionContainer}} >
                 <View style={{flex:2}}>
                 <ProgressCircle
                   path="health/os/cpuse"
@@ -67,15 +68,24 @@ export default class PlaygroundScreen extends React.Component {
                 <ProgressCircle path="health/os/cpuse" multiplier={0.01} unit="%" decimalPlaces={1} height={200} />
                 </View>
               </View>
+              <View style={{flex:1, ...styles.sectionContainer}}>
+                <Switch 
+                  onValueChange={(value) => {
+                    console.log(value)
+                    value = true;
+                  }}
+                  thumbColor={colors.p50}
+                />
+              </View>
               <View style={{flex:3}}>
-                <PlotSingle path = "imu/gyros/x" showX = {false} />
+                {/* <PlotSingle path = "imu/gyros/x" showX = {false} />
                 <PlotMulti paths = {["imu/gyros/y", "imu/gyros/z"]} colors = {['#8a2be2', '#ff1493']}/>
                 <Plot3DOF
                   title = "acceleration"
                   paths = {["imu/accel/x", "imu/accel/y","imu/accel/z"]}
                   labels =  {["x", "y", "z"]}
                   showY = {true}
-                />
+                /> */}
               </View>
               <View style={{justifyContent:'center', alignItems:'center'}}>
               <Image

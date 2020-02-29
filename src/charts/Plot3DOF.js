@@ -16,7 +16,9 @@ class Plot3DOF extends React.PureComponent {
         let { paths, showX, showY, title, labels } = this.props;
         return (
             <View>
-                <PlotMulti title={title} paths={paths} showX={showX} showY={showY} labels={labels}/>
+                <PlotMulti title={title} paths={paths} showX={showX} showY={showY} labels={labels}
+                    colors={['#008b8b', '#1e90ff','#dc143c']}
+                />
             </View>
         );
     }
