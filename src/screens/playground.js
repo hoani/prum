@@ -77,9 +77,11 @@ export default class PlaygroundScreen extends React.Component {
                   thumbColor={colors.p50}
                 />
               </View>
-              <View style={{flex:3}}>
+              <View style={{flex:3, ...styles.sectionContainer}}>
                 {/* <PlotSingle path = "imu/gyros/x" showX = {false} /> */}
-                <PlotMulti paths = {["imu/gyros/y", "imu/gyros/z"]} colors = {['#8a2be2', '#ff1493']}/>
+                <PlotMulti height={80} title = "gyroscope" paths={["imu/gyros/x", "imu/gyros/y", "imu/gyros/z"]} colors = {['#8a2be2', '#ff1493']}/>
+              </View>
+              <View style={{flex:3, ...styles.sectionContainer}}>
                 <Plot3DOF
                   title = "acceleration"
                   paths = {["imu/accel/x", "imu/accel/y","imu/accel/z"]}

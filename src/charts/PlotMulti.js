@@ -18,6 +18,7 @@ class PlotMulti extends React.PureComponent {
         let { title, plotData, paths, colors, labels, height } = this.props;
         let { yMin, yMax } = this.props;
         let { showX, showY } = this.props;
+        let yTicks = Math.floor(height/50) + 1;
 
 
 
@@ -80,7 +81,7 @@ class PlotMulti extends React.PureComponent {
                             marginLeft: 5,
                         }}
                         contentInset={ { top: 10, bottom: 10 } }
-                        numberOfTicks={6}
+                        numberOfTicks={yTicks}
                         formatLabel={(value) => `${value}`}
                     /> :
                     <></>
