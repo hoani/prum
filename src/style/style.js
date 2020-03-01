@@ -113,6 +113,9 @@ const navbarStyle = {
   headerStyle: {
     backgroundColor: colors.header,
   },
+  footerStyle: {
+    backgroundColor: colors.header,
+  },
   headerTintColor: colors.tEmphasis,
   headerTitleStyle: {
     fontWeight: 'bold',

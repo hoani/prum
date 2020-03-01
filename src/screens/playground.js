@@ -31,7 +31,7 @@ export default class PlaygroundScreen extends React.Component {
     return (
       <>
         <StatusBar barStyle="light-content" />
-        <SafeAreaView>
+        <SafeAreaView style={{ backgroundColor: colors.header }}>
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
             style={styles.scrollView}>
@@ -69,7 +69,7 @@ export default class PlaygroundScreen extends React.Component {
                 </View>
               </View>
               <View style={{flex:1, ...styles.sectionContainer}}>
-                <Switch 
+                <Switch
                   onValueChange={(value) => {
                     console.log(value)
                     value = true;
@@ -97,6 +97,7 @@ export default class PlaygroundScreen extends React.Component {
             </View>
           </ScrollView>
         </SafeAreaView>
+        <SafeAreaView style={{ flex: 1, ...styles.scrollView }}></SafeAreaView>
       </>
     );
   }

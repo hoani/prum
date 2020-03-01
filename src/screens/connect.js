@@ -5,6 +5,7 @@ import {
   View,
   Text,
   StatusBar,
+  TabBarIOS
 } from 'react-native';
 
 import { styles, colors } from "../style/style";
@@ -25,7 +26,8 @@ export default class ConnectScreen extends React.Component {
     return (
       <>
         <StatusBar barStyle="light-content" />
-        <SafeAreaView style={{flex:1}}>
+
+        <SafeAreaView style={{flex:1, backgroundColor: colors.header }}>
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
             style={{flex:1, ...styles.scrollView}}

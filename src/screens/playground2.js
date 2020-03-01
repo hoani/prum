@@ -31,7 +31,7 @@ export default class ManualScreen extends React.Component {
     return (
       <>
         <StatusBar barStyle="light-content" />
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1, ...styles.scrollView }}>
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
             style={styles.scrollView}>
@@ -172,6 +172,7 @@ export default class ManualScreen extends React.Component {
             </View>
           </ScrollView>
         </SafeAreaView>
+
       </>
     );
   }
