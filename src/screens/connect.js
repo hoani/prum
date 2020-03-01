@@ -1,23 +1,15 @@
 import React from 'react';
 import {
-  TextInput,
   SafeAreaView,
   ScrollView,
   View,
   Text,
   StatusBar,
-  FlatList,
 } from 'react-native';
-
-import Image from 'react-native-scalable-image';
 
 import { styles, colors } from "../style/style";
 
-import {input} from "../state/reducer"
-
 import IconButton from '../input/IconButton';
-import ConnectButton from '../input/ConnectButton';
-
 
 import {AppContext} from '../state/appContext';
 import TcpConnect from '../input/TcpConnect';
@@ -62,14 +54,14 @@ export default class ConnectScreen extends React.Component {
                       client.disconnect();
                     }}
                   />
-                </View> 
+                </View>
               </View> */}
 
               <View style={styles.sectionContainer}>
                 <Text style={styles.sectionDescription}>
                     Interfaces:
                 </Text>
-                { 
+                {
                   uiScreens.map((item) => {
                     return (
                       <View style = {{paddingTop: 12}} key={item.title + "view"}>

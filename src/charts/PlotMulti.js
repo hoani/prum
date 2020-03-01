@@ -19,6 +19,8 @@ class PlotMulti extends React.PureComponent {
         let { yMin, yMax } = this.props;
         let { showX, showY } = this.props;
 
+
+
         const PlotLine = ({ line, color }) => (
             <Path
                 key={'line'}
@@ -32,6 +34,7 @@ class PlotMulti extends React.PureComponent {
         if (paths.length > 0 && paths[0] in plotData) {
             axis_data = plotData[paths[0]];
         }
+
 
         return (
             <View style={ { height: height, flex: 1, flexDirection: "column" } }>
@@ -141,7 +144,7 @@ const DEFAULT_COLORS = [
 
 mapStateToProps = (state, ownProps) => {
     let storedData = state.data.plot;
-    let plotData = ownProps.plotData;
+    let plotData = Object.assign({}, ownProps.plotData);
 
     let yData = [];
 
@@ -155,7 +158,7 @@ mapStateToProps = (state, ownProps) => {
         }
     }
 
-    for (path of ownProps.paths) {
+    for (let path of ownProps.paths) {
         if (path in storedData) {
             if (path in plotData) {
                 if (storedData[path] != plotData[path]) {
@@ -167,49 +170,43 @@ mapStateToProps = (state, ownProps) => {
             }
             update = true;
             plotData[path] = storedData[path];
-            const yValues = plotData[path].map(item => item.y);
-            yData = yData.concat(yValues);
+
         }
         else {
             plotData[path] = [{x: 0, y: 0}];
         }
+        const yValues = plotData[path].map(item => item.y);
+        yData = yData.concat(yValues);
     }
 
-    if (update) {
-        let yMax = null;
-        let yMin = null;
 
-        if (yData.length == 0) {
-            yMin = 0.0;
-            yMax = 0.0;
-        }
-        else {
+
+    if (update) {
+        let yMax = 0.0;
+        let yMin = 0.0;
+
+        if (yData.length != 0) {
             yMax = Math.max(...yData);
             yMin = Math.min(...yData);
         }
 
-        return {
-            yMax,
-            yMin,
-            plotData,
-        };
+        let newProps = {
+            ...ownProps,
+            yMax: yMax,
+            yMin: yMin,
+            plotData: plotData,
+        }
+
+        return newProps;
     }
     else {
         return ownProps;
     }
 };
 
-const mapDispatchToProps = {
-    newData
-};
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    return Object.assign({}, ownProps, stateProps, dispatchProps)
-}
-
-ConnectedPlotMulti = connect(mapStateToProps, mapDispatchToProps, mergeProps)(PlotMulti);
+ConnectedPlotMulti = connect(mapStateToProps)(PlotMulti);
 ConnectedPlotMulti.defaultProps = {
-    plotData: [],
+    plotData: {},
     paths: [],
     colors: [],
     showX: true,
@@ -217,6 +214,8 @@ ConnectedPlotMulti.defaultProps = {
     title: "",
     labels: [],
     height: 200,
+    yMin: 0.0,
+    yMax: 0.0,
 };
 
 export default ConnectedPlotMulti;
