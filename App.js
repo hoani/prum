@@ -24,6 +24,7 @@ import {AppContext} from './src/state/appContext';
 import leap_config from './protocol.json';
 import ConnectScreen from './src/screens/connect';
 import ManualScreen from './src/screens/manual';
+import PidControlScreen from './src/screens/pidControl';
 import PlaygroundScreen from './src/screens/playground';
 import {theme, navbarStyle} from './src/style/style';
 
@@ -42,6 +43,8 @@ const MainNavigator = createStackNavigator(
   {
     Connect: {screen: ConnectScreen},
     Manual: {screen: ManualScreen},
+    PidControl: {screen: PidControlScreen},
+    Disagnostics: {screen: ManualScreen},
     Playground: {screen: PlaygroundScreen}
   },
   {
@@ -66,6 +69,16 @@ export default class App extends React.Component {
         iconName: 'gamepad',
         title: 'Manual Control',
         key: 'Manual'
+      },
+      {
+        iconName: 'tachometer',
+        title: 'PID Control',
+        key: 'PidControl'
+      },
+      {
+        iconName: 'stethoscope',
+        title: 'Diagnostics',
+        key: 'Diagnostics'
       },
       {
         iconName: 'flask',

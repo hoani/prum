@@ -17,8 +17,30 @@
         control/pid/setpoint: "",
       }
 
-[] Add health GUI
 [] Add PID GUI
+  [] Gain inputs and update button
+    [X] Layout
+    [] Disable/Enable on incorrect inputs
+    [] Send updates to robot
+  [] Setpoint Input and update button
+    [X] Layout
+    [] Disable/Enable on incorrect inputs
+    [] Send updates to robot
+  [] Enable toggle
+    [X] Layout
+    [] Enable/disable PID control toggle
+    [] Sticks on when enabled
+    [] Sticks off when disabled
+  [X] Show yaw and pitch angles
+  [] Show motor input
+
+[] Add diagnostics GUI
+  [] CPU Usage
+  [] Battery
+  [] Accelerometer
+  [] Gyros
+  [] Magnetometer
+
 
 
 

@@ -17,6 +17,7 @@ import PlotSingle from '../charts/PlotSingle';
 import PlotMulti from '../charts/PlotMulti';
 import Plot3DOF from '../charts/Plot3DOF';
 import ProgressCircle from '../charts/ProgressCircle';
+import AngleIndicator from '../charts/AngleIndicator';
 
 
 import {AppContext} from '../state/appContext';
@@ -63,7 +64,7 @@ export default class PlaygroundScreen extends React.Component {
                 />
                 </View><View style={{flex:1}}>
 
-                <ProgressCircle path="health/os/cpuse" multiplier={0.01} unit="%" decimalPlaces={1} height={48} />
+                <AngleIndicator path='ahrs/angles/pitch' unit="%" decimalPlaces={1} height={64} />
                 </View><View style={{flex:3}}>
                 <ProgressCircle path="health/os/cpuse" multiplier={0.01} unit="%" decimalPlaces={1} height={200} />
                 </View>
