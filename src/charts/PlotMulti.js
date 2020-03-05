@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Path } from 'react-native-svg';
 
 import { AreaChart, Grid, XAxis, YAxis } from 'react-native-svg-charts';
-import Legend from './Legend'
+import Legend from '../charts/legend'
 import * as shape from 'd3-shape';
 
 import { connect } from 'react-redux';

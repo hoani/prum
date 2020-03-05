@@ -10,10 +10,10 @@ import {
 
 import { styles, colors } from "../style/style";
 
-import IconButton from '../input/IconButton';
+import IconButton from '../input/iconButton';
 
 import {AppContext} from '../state/appContext';
-import TcpConnect from '../input/TcpConnect';
+import TcpConnect from '../input/tcpConnect';
 
 export default class ConnectScreen extends React.Component {
 

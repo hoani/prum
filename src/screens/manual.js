@@ -12,14 +12,14 @@ import Image from 'react-native-scalable-image';
 
 import { Icon } from 'react-native-elements';
 
-import PlotMulti from '../charts/PlotMulti';
-import ProgressCircle from '../charts/ProgressCircle';
+import PlotMulti from '../charts/plotMulti';
+import ProgressCircle from '../charts/progressCircle';
 
 import { styles, colors } from "../style/style.js";
 
 
 import {AppContext} from '../state/appContext';
-import ManualControls from '../input/ManualControls';
+import ManualControls from '../input/manualControls';
 
 
 export default class ManualScreen extends React.Component {

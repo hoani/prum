@@ -41,7 +41,7 @@
   [] Gyros
   [] Magnetometer
 
-[] clean up some headers
+[] clean up unnecessary imports on files
 
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import PlotMulti from './PlotMulti';
+import PlotMulti from '../charts/plotMulti';
 
 class Plot3DOF extends React.PureComponent {
     static defaultProps = {

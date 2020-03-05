@@ -13,11 +13,11 @@ import { styles, colors } from "../style/style.js";
 
 import Image from 'react-native-scalable-image';
 
-import PlotSingle from '../charts/PlotSingle';
-import PlotMulti from '../charts/PlotMulti';
-import Plot3DOF from '../charts/Plot3DOF';
-import ProgressCircle from '../charts/ProgressCircle';
-import AngleIndicator from '../charts/AngleIndicator';
+import PlotSingle from '../charts/plotSingle';
+import PlotMulti from '../charts/plotMulti';
+import Plot3DOF from '../charts/plot3DOF';
+import ProgressCircle from '../charts/progressCircle';
+import AngleIndicator from '../charts/angleIndicator';
 
 
 import {AppContext} from '../state/appContext';

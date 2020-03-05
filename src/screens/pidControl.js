@@ -13,11 +13,11 @@ import { styles, colors } from "../style/style.js";
 
 import {AppContext} from '../state/appContext';
 
-import AngleIndicator from '../charts/AngleIndicator';
-import PlotMulti from '../charts/PlotMulti';
+import AngleIndicator from '../charts/angleIndicator';
+import PlotMulti from '../charts/plotMulti';
 
-import IconButton from '../input/IconButton';
-import PidControls from '../input/PidControls';
+import IconButton from '../input/iconButton';
+import PidControls from '../input/pidControls';
 
 
 export default class PidControlScreen extends React.Component {
