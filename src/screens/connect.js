@@ -37,27 +37,6 @@ export default class ConnectScreen extends React.Component {
               <View style={styles.sectionContainer}>
                 <TcpConnect client={client}/>
               </View>
-              {/* <View style={styles.sectionContainer}>
-                <Text style={styles.sectionDescription}>
-                  Connect Wifi
-                </Text>
-                <TextInput
-                  style={styles.textInput}
-                  value='192.168.1.13'
-                />
-                <View style = {{paddingTop: 12}}>
-                  <ConnectButton
-                    style={{paddingTop:12}}
-                    title="Connect Wifi"
-                    onPressConnect={() => {
-                      client.connect({localAddress: 'localhost'});
-                    }}
-                    onPressDisconnect={() => {
-                      client.disconnect();
-                    }}
-                  />
-                </View>
-              </View> */}
 
               <View style={styles.sectionContainer}>
                 <Text style={styles.sectionDescription}>
