@@ -16,8 +16,8 @@ import {AppContext} from '../state/appContext';
 import AngleIndicator from '../charts/AngleIndicator';
 import PlotMulti from '../charts/PlotMulti';
 
-import IconButton from '../input/IconButton';
-import PidControls from '../input/PidControls';
+import IconButton from '../input/iconButton';
+import PidControls from '../input/pidControls';
 
 
 export default class PidControlScreen extends React.Component {

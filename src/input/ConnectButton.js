@@ -1,5 +1,5 @@
 import React from 'react';
-import IconButton from '../input/IconButton';
+import IconButton from '../input/iconButton';
 
 import { connect } from 'react-redux';
 

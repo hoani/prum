@@ -10,7 +10,7 @@ import { styles, colors} from "../style/style";
 
 import {input} from "../state/reducer"
 
-import IconButton from '../input/IconButton';
+import IconButton from '../input/iconButton';
 
 import { connect } from 'react-redux';
 

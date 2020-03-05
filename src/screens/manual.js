@@ -19,7 +19,7 @@ import { styles, colors } from "../style/style.js";
 
 
 import {AppContext} from '../state/appContext';
-import ManualControls from '../input/ManualControls';
+import ManualControls from '../input/manualControls';
 
 
 export default class ManualScreen extends React.Component {
