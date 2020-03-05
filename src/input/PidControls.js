@@ -14,26 +14,21 @@ import IconButton from '../input/IconButton';
 
 import { connect } from 'react-redux';
 
-class TcpConnect extends React.PureComponent {
-  static defaultProps = {
-    enabled:false,
-    client: null,
-    kp: 1.0,
-    ki: 0.0,
-    kd: 0.0,
-    setpoint: 0.0,
-  };
+import {Packet} from 'leap-protocol';
+
+class PidControls extends React.PureComponent {
 
   render() {
     let {enabled, client} = this.props;
     let {kp, ki, kd, setpoint} = this.props;
+    console.log(kp)
 
     let disableGains = false;
     let disableSetpoint = false;
 
     let reFloat = /^\d{1,}\.\d{1,}$/;
 
-    if ((reFloat.test(kp) && reFloat.test(ki) && reFloat.test(kd)) == false) {
+    if (reFloat.test(kp) == false || reFloat.test(ki) == false || reFloat.test(kd) == false) {
       disableGains = true;
     }
     if (reFloat.test(setpoint) == false) {
@@ -44,12 +39,30 @@ class TcpConnect extends React.PureComponent {
       <>
         <View style={{flexDirection: "column"}}>
           <View style={{flexDirection: "row"}}>
+            <Text style={{
+              ...styles.label,
+              flex:1,
+              textAlignVertical: "center",
+              textAlign:"right",
+              marginVertical:4
+            }}>
+              Enable
+            </Text>
             <Switch
               onValueChange={(value) => {
-                console.log(value)
-                value = true;
+                this.props.input("pid/enabled", value)
+                let packet = new Packet("set");
+                if (value) {
+                  packet.add('control/pendulum/enable', []);
+                }
+                else {
+                  packet.add('control/disable', []);
+                }
+                client.send(packet);
               }}
+              value={enabled}
               thumbColor={colors.p50}
+              trackColor={colors.s200}
             />
           </View>
           <View style={{flexDirection: "row"}}>
@@ -60,9 +73,9 @@ class TcpConnect extends React.PureComponent {
                 </Text>
                 <TextInput
                   style={{...styles.textInput, flex:3}}
-                  defaultValue={"1.00"}
-                  onChangeText={(value) => {console.log(value)}}
-                />
+                  defaultValue={kp}
+                  onChangeText={(value) => this.props.input("pid/kp", value)}
+                  />
               </View>
               <View style={{flex:1, flexDirection:"column", padding:2}}>
                 <Text style={{...styles.sectionDescription, flex:1, paddingVertical:5, textAlign:"center"}}>
@@ -70,9 +83,9 @@ class TcpConnect extends React.PureComponent {
                 </Text>
                 <TextInput
                   style={{...styles.textInput, flex:3}}
-                  defaultValue={"1.00"}
-                  onChangeText={(value) => {console.log(value)}}
-                />
+                  defaultValue={ki}
+                  onChangeText={(value) => this.props.input("pid/ki", value)}
+                  />
               </View>
               <View style={{flex:1, flexDirection:"column", padding:2}}>
                 <Text style={{...styles.sectionDescription, flex:1, paddingVertical:5, textAlign:"center"}}>
@@ -80,8 +93,8 @@ class TcpConnect extends React.PureComponent {
                 </Text>
                 <TextInput
                   style={{...styles.textInput, flex:3}}
-                  defaultValue={"1.00"}
-                  onChangeText={(value) => {console.log(value)}}
+                  defaultValue={kd}
+                  onChangeText={(value) => this.props.input("pid/kd", value)}
                 />
               </View>
             </View>
@@ -90,6 +103,15 @@ class TcpConnect extends React.PureComponent {
                 iconName="send"
                 iconType="font-awesome"
                 title='     Send'
+                disabled={disableGains}
+                onPress={ () => {
+                  let packet = new Packet(
+                    'set',
+                    'control/pendulum/gains',
+                    [kp, ki, kd]
+                  );
+                  client.send(packet);
+                }}
               />
             </View>
           </View>
@@ -102,7 +124,7 @@ class TcpConnect extends React.PureComponent {
                 <TextInput
                   style={{...styles.textInput, flex:3}}
                   defaultValue={"1.00"}
-                  onChangeText={(value) => {console.log(value)}}
+                  onChangeText={(value) => this.props.input("pid/setpoint", value)}
                 />
               </View>
             </View>
@@ -111,53 +133,55 @@ class TcpConnect extends React.PureComponent {
                 iconName="send"
                 iconType="font-awesome"
                 title='     Send'
+                disabled={disableSetpoint}
+                onPress={ () => {
+                  let packet = new Packet(
+                    'set',
+                    'control/pendulum/setpoint',
+                    [setpoint]
+                  );
+                  client.send(packet);
+                }}
               />
             </View>
           </View>
         </View>
-        {/* <Text style={styles.sectionDescription}>
-          Connect Wifi
-        </Text>
-        <TextInput
-          style={styles.textInput}
-          defaultValue={address}
-          onChangeText={
-            (value) => {
-              this.props.input("tcp/address", value);
-            }
-          }
-        />
-        <View style = {{paddingTop: 12}}>
-          <ConnectButton
-            disabled = {disabled}
-            style={{paddingTop:12}}
-            title="Connect Wifi"
-            onPressConnect={() => {
-              client.connect({ host: address});
-
-            }}
-            onPressDisconnect={() => {
-              client.disconnect();
-            }}
-          />
-        </View> */}
       </>
     );
   }
 }
-const mapStateToProps = (state, ownProps) => {
-  if ("tcp/address" in state.input) {
-    if (state.input["tcp/address"] != ownProps.address) {
-      return {
-        address: state.input["tcp/address"],
-      };
+
+function checkInputState(inputState, inputKey, currentProps, propsKey, outputProps) {
+  if (inputKey in inputState) {
+    if (inputState[inputKey] != currentProps[propsKey]) {
+      outputProps[propsKey] = inputState[inputKey];
     }
   }
-  return {};
+}
+
+const mapStateToProps = (state, ownProps) => {
+  let newProps = {};
+  checkInputState(state.input, "pid/kp", ownProps, "kp", newProps);
+  checkInputState(state.input, "pid/ki", ownProps, "ki", newProps);
+  checkInputState(state.input, "pid/kd", ownProps, "kd", newProps);
+  checkInputState(state.input, "pid/setpoint", ownProps, "setpoint", newProps);
+  checkInputState(state.input, "pid/enabled", ownProps, "enabled", newProps);
+  return newProps;
 };
 
 const mapDispatchToProps = {
   input
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TcpConnect);
+const ConnectedPidControls = connect(mapStateToProps, mapDispatchToProps)(PidControls);
+
+ConnectedPidControls.defaultProps = {
+  enabled:false,
+  client: null,
+  kp: "1.0",
+  ki: "0.0",
+  kd: "0.0",
+  setpoint: "0.0",
+};
+
+export default ConnectedPidControls;

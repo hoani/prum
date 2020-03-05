@@ -67,6 +67,12 @@ const containerStyles = StyleSheet.create({
     fontWeight: '400',
     color: colors.tNormal,
   },
+  label: {
+    marginHorizontal: 8,
+    fontSize: 18,
+    fontWeight: '500',
+    color: colors.tNormal,
+  },
 });
 
 const inputStyles = StyleSheet.create({

@@ -14,11 +14,6 @@ import ConnectButton from '../input/ConnectButton';
 import { connect } from 'react-redux';
 
 class TcpConnect extends React.PureComponent {
-  static defaultProps = {
-    address:'192.168.1.13',
-    client: null
-  };
-
   render() {
     let {address, client} = this.props;
     let disabled = false;
@@ -50,13 +45,13 @@ class TcpConnect extends React.PureComponent {
             title="Connect Wifi"
             onPressConnect={() => {
               client.connect({ host: address});
-              
+
             }}
             onPressDisconnect={() => {
               client.disconnect();
             }}
           />
-        </View>    
+        </View>
       </>
     );
   }
@@ -76,4 +71,11 @@ const mapDispatchToProps = {
   input
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TcpConnect);
+const ConnectedTcpConnect = connect(mapStateToProps, mapDispatchToProps)(TcpConnect);
+
+ConnectedTcpConnect.defaultProps = {
+  address:'192.168.1.13',
+  client: null
+};
+
+export default ConnectedTcpConnect;

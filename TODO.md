@@ -41,6 +41,8 @@
   [] Gyros
   [] Magnetometer
 
+[] clean up some headers
+
 
 
 

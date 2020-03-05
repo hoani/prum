@@ -18,94 +18,94 @@
   "data": [
     { "protocol": { "addr": "0000", "data": [
       { "version": { "data": [
-        { "major": { "type": "u8", "set": false } },
-        { "minor": { "type": "u8", "set": false } },
-        { "patch": { "type": "u16", "set": false } }
+        { "major": { "type": "u8"} },
+        { "minor": { "type": "u8"} },
+        { "patch": { "type": "u16"} }
       ] } },
-      { "name": { "type": "string", "set": false } }
+      { "name": { "type": "string"} }
     ] } },
-    { "ping": { "addr": "1000", "type":  "bool", "set": false } },
+    { "ping": { "addr": "1000", "type":  "bool"} },
     { "rlog": { "addr": "1010", "data": [
-      { "active": { "type": "bool", "set": true } }
+      { "active": { "type": "bool"} }
     ] } },
     { "health": { "addr": "1100", "data": [
       { "batt": { "data": [
-        { "v": { "type": "float", "set": false } }
+        { "v": { "type": "float"} }
       ] } },
       { "os": { "data": [
-        { "cpuse": { "type": "float", "set": false } }
+        { "cpuse": { "type": "float"} }
       ] } }
     ] } },
     { "motor": { "addr": "1120", "data": [
-      { "left": {"type": "float", "set": false } },
-      { "right": {"type": "float", "set": false } }
+      { "left": {"type": "float"} },
+      { "right": {"type": "float"} }
     ] } },
     { "imu": { "addr": "1200", "data": [
       { "accel": { "data": [
-        { "x": { "type": "float", "set": false } },
-        { "y": { "type": "float", "set": false } },
-        { "z": { "type": "float", "set": false } }
+        { "x": { "type": "float"} },
+        { "y": { "type": "float"} },
+        { "z": { "type": "float"} }
       ] } },
       { "gyros": { "data": [
-        { "x": { "type": "float", "set": false } },
-        { "y": { "type": "float", "set": false } },
-        { "z": { "type": "float", "set": false } }
+        { "x": { "type": "float"} },
+        { "y": { "type": "float"} },
+        { "z": { "type": "float"} }
       ] } },
       { "magne": { "data": [
-        { "x": { "type": "float", "set": false } },
-        { "y": { "type": "float", "set": false } },
-        { "z": { "type": "float", "set": false } }
+        { "x": { "type": "float"} },
+        { "y": { "type": "float"} },
+        { "z": { "type": "float"} }
       ] } }
     ] } },
    {  "nav": { "addr": "1300", "data": [
       { "ang": { "data": [
-        { "roll":  { "type": "float", "set": false } },
-        { "pitch": { "type": "float", "set": false } },
-        { "yaw":   { "type": "float", "set": false } }
+        { "roll":  { "type": "float"} },
+        { "pitch": { "type": "float"} },
+        { "yaw":   { "type": "float"} }
       ] } },
       { "pos": { "data": [
-        { "x": { "type": "float", "set": false } },
-        { "y": { "type": "float", "set": false } },
-        { "z": { "type": "float", "set": false } }
+        { "x": { "type": "float"} },
+        { "y": { "type": "float"} },
+        { "z": { "type": "float"} }
       ] } },
       { "vel": { "data": [
-        { "x": { "type": "float", "set": false } },
-        { "y": { "type": "float", "set": false } },
-        { "z": { "type": "float", "set": false } }
+        { "x": { "type": "float"} },
+        { "y": { "type": "float"} },
+        { "z": { "type": "float"} }
       ] } }
     ] } },
     { "ahrs": { "addr": "1400", "data": [
       { "angle": { "data": [
-        { "pitch":    { "type": "float", "set": false } },
-        { "yaw":      { "type": "float", "set": false } }
+        { "pitch":    { "type": "float"} },
+        { "yaw":      { "type": "float"} }
       ] } },
       { "mode": { "data": [
-        { "cal":      { "type": "bool", "set": true } },
-        { "still":    { "type": "bool", "set": true } },
-        { "dynamic":  { "type": "bool", "set": true } },
-        { "smart":    { "type": "bool", "set": true } }
+        { "cal":      { "type": "bool"} },
+        { "still":    { "type": "bool"} },
+        { "dynamic":  { "type": "bool"} },
+        { "smart":    { "type": "bool"} }
       ] } }
     ] } },
     { "control": { "addr": "8000", "data": [
-      { "disable": { "type": "bool", "set": true } },
+      { "disable": { "type": "none"} },
       { "manual": { "data": [
-        { "direction": { "type": ["FW", "BW", "LT", "RT"], "set": true } },
-        { "speed": { "type": "float", "set": true, "bounds": [0.0, 1.0] } },
-        { "duration": { "type": "float", "set": true, "bounds": [0.0, 1.0] } }
+        { "direction": { "type": ["FW", "BW", "LT", "RT"] } },
+        { "speed": { "type": "float"} },
+        { "duration": { "type": "float"} }
       ] } },
       { "automatic": { "data": [
-        { "speed":  { "type": "float", "set": true, "bounds": [0.0, 1.0] } },
-        { "enable": { "type": "bool", "set": true } }
+        { "speed":  { "type": "float"} },
+        { "enable": { "type": "bool"} }
       ] } },
       { "pendulum": { "data": [
         { "gains": { "data": [
-          { "kp": { "type": "float", "set": true } },
-          { "ki": { "type": "float", "set": true } },
-          { "kd": { "type": "float", "set": true } }
+          { "kp": { "type": "float"} },
+          { "ki": { "type": "float"} },
+          { "kd": { "type": "float"} }
         ] } },
-        { "setpoint": {"type": "float", "set": true } },
-        { "limit":  {"type": "float", "set": true } },
-        { "enable": {"type": "bool", "set": true } }
+        { "setpoint": {"type": "float"} },
+        { "limit":  {"type": "float"} },
+        { "enable": {"type": "none"} }
       ] } }
     ] } }
   ]
