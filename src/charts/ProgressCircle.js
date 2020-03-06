@@ -7,32 +7,11 @@ import { colors as styleColors } from "../style/style.js";
 
 import { connect } from 'react-redux';
 
-import { newData } from '../state/reducer';
-
 class ProgressCircle extends React.PureComponent {
-    static defaultProps = {
-        rawValue: 0.0,
-        offset: 0.0,
-        multiplier: 1.0,
-        textMultiplier: 1.0,
-        iconColors: [],
-        iconNames: [],
-        iconTypes: [],
-        iconIntervals: [],
-        path: "",
-        height: 120,
-        decimalPlaces: 0,
-        textUnit: "",
-        fontSizePercent: 100.0,
-        showText: true,
-        barColors: ['#77c'],
-        barIntervals: [100.0],
-
-    };
 
     render() {
         let { height, iconColors, iconNames, iconTypes, iconIntervals } = this.props;
-        let { rawValue, multiplier, textMultiplier} = this.props;
+        let { rawValue, offset, multiplier, textMultiplier} = this.props;
 
 
         let iconName = "";
@@ -60,7 +39,7 @@ class ProgressCircle extends React.PureComponent {
         }
 
         let strokeWidth = height/10.0;
-        let value = (rawValue * multiplier)
+        let value = ((rawValue - offset) * multiplier)
         let textValue = (rawValue * textMultiplier)
 
         const Label = ({height}) => {
@@ -127,8 +106,25 @@ const mapStateToProps = (state, ownProps) => {
     };
 };
 
-const mapDispatchToProps = {
-    newData
+const connectedProgressCircle = connect(mapStateToProps)(ProgressCircle);
+
+connectedProgressCircle.defaultProps = {
+    rawValue: 0.0,
+    offset: 0.0,
+    multiplier: 1.0,
+    textMultiplier: 1.0,
+    iconColors: [],
+    iconNames: [],
+    iconTypes: [],
+    iconIntervals: [],
+    path: "",
+    height: 120,
+    decimalPlaces: 0,
+    textUnit: "",
+    fontSizePercent: 100.0,
+    showText: true,
+    barColors: ['#77c'],
+    barIntervals: [100.0],
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProgressCircle);
+export default connectedProgressCircle;
