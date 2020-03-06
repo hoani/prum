@@ -25,6 +25,7 @@ import leap_config from './protocol.json';
 import ConnectScreen from './src/screens/connect';
 import ManualScreen from './src/screens/manual';
 import PidControlScreen from './src/screens/pidControl';
+import DiagnosticsScreen from './src/screens/diagnostics';
 import PlaygroundScreen from './src/screens/playground';
 import {theme, navbarStyle} from './src/style/style';
 
@@ -44,7 +45,7 @@ const MainNavigator = createStackNavigator(
     Connect: {screen: ConnectScreen},
     Manual: {screen: ManualScreen},
     PidControl: {screen: PidControlScreen},
-    Disagnostics: {screen: ManualScreen},
+    Diagnostics: {screen: DiagnosticsScreen},
     Playground: {screen: PlaygroundScreen}
   },
   {

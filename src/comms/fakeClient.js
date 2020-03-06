@@ -11,6 +11,13 @@ const pitchValues = [
   -140, -150, -170, -190, -180, -170, -160,
 ];
 
+const batteryValues = [
+  7.4, 7.5, 7.6, 7.55, 7.7, 7.8, 7.8, 7.85, 7.9, 8.1, 8.15, 8.2, 8.25, 8.3, 8.35, 8.4, 8.5, 8.6, 8.5, 8.4,
+  8.35, 8.3, 8.25, 8.1, 8.05, 8.0, 7.95, 7.9, 7.9, 7.9, 7.9, 7.85, 7.8, 7.7, 7.5, 7.45, 7.35, 7.2, 7.1, 7.1,
+  7.1, 7.1, 7.1, 7.1, 7.05, 7.1, 7.15, 7.05, 7.0, 6.9, 6.8, 6.7, 6.5, 6.4, 6.3, 6.2, 6.1, 6.1, 6.1, 6.1, 6.4,
+  6.5, 6.6, 6.8, 6.9, 7.1, 7.2, 7.3,
+]
+
 export default class Client {
   constructor(port = 11337, host, codec, store) {
     this.interval = null;
@@ -33,7 +40,7 @@ export default class Client {
     this.addItem('ahrs/angles/yaw', [0.0], 2.0);
 
     this.addItem('health/os/cpuse', [40.0], 15.0);
-    this.addItem('health/batt/v', [7.6], 0.2);
+    this.addItem('health/batt/v', batteryValues, 0.0);
   }
 
   addItem(key, profile, noise) {
