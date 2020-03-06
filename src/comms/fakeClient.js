@@ -1,4 +1,3 @@
-import { connected } from '../state/reducer';
 
 const pitchValues = [
   -120, -115, -110, -105, -100, -95, -90, -85, -80, -75, -70,

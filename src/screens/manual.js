@@ -1,19 +1,10 @@
 import React from 'react';
 import {
-  Dimensions,
   SafeAreaView,
   ScrollView,
   View,
-  Text,
   StatusBar,
 } from 'react-native';
-
-import Image from 'react-native-scalable-image';
-
-import { Icon } from 'react-native-elements';
-
-import PlotMulti from '../charts/plotMulti';
-import ProgressCircle from '../charts/progressCircle';
 
 import { styles, colors } from "../style/style.js";
 

@@ -18,21 +18,21 @@
       }
 
 [] Add PID GUI
-  [] Gain inputs and update button
+  [X] Gain inputs and update button
     [X] Layout
-    [] Disable/Enable on incorrect inputs
-    [] Send updates to robot
-  [] Setpoint Input and update button
+    [X] Disable/Enable on incorrect inputs
+    [X] Send updates to robot
+  [X] Setpoint Input and update button
     [X] Layout
-    [] Disable/Enable on incorrect inputs
-    [] Send updates to robot
-  [] Enable toggle
+    [X] Disable/Enable on incorrect inputs
+    [X] Send updates to robot
+  [X] Enable toggle
     [X] Layout
-    [] Enable/disable PID control toggle
-    [] Sticks on when enabled
-    [] Sticks off when disabled
+    [X] Enable/disable PID control toggle
+    [X] Sticks on when enabled
+    [X] Sticks off when disabled
   [X] Show yaw and pitch angles
-  [] Show motor input
+  [] Test with Robot
 
 [] Add diagnostics GUI
   [] CPU Usage
@@ -41,7 +41,7 @@
   [] Gyros
   [] Magnetometer
 
-[] clean up unnecessary imports on files
+[X] clean up unnecessary imports on files
 
 
 

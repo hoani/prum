@@ -5,7 +5,6 @@ import {
   View,
   Text,
   StatusBar,
-  TabBarIOS
 } from 'react-native';
 
 import { styles, colors } from "../style/style";

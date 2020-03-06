@@ -5,8 +5,6 @@ import {
   View,
   Text,
   StatusBar,
-  TextInput,
-  Switch,
 } from 'react-native';
 
 import { styles, colors } from "../style/style.js";
@@ -16,7 +14,6 @@ import {AppContext} from '../state/appContext';
 import AngleIndicator from '../charts/angleIndicator';
 import PlotMulti from '../charts/plotMulti';
 
-import IconButton from '../input/iconButton';
 import PidControls from '../input/pidControls';
 
 

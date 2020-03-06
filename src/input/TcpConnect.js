@@ -9,7 +9,7 @@ import { styles} from "../style/style";
 
 import {input} from "../state/reducer"
 
-import ConnectButton from './connectButton';
+import ConnectButton from '../input/connectButton';
 
 import { connect } from 'react-redux';
 
