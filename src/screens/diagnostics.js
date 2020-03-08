@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Dimensions,
   SafeAreaView,
   ScrollView,
   View,
@@ -12,6 +11,7 @@ import { Icon } from 'react-native-elements';
 
 import PlotBar from '../charts/plotBar';
 import PlotMulti from '../charts/plotMulti';
+import Plot3DOF from '../charts/plot3DOF';
 import ProgressCircle from '../charts/progressCircle';
 import BatteryGauge from '../charts/batteryGauge';
 
@@ -107,12 +107,39 @@ export default class ManualScreen extends React.Component {
                   <PlotMulti
                     paths={["motor/left", "motor/right"]}
                     showY={true}
+                    showX={false}
                     labels={["Left", "Right"]}
                     colors={[colors.p300, colors.p100]}
                     height={120}
                   />
                 </View>
               </View>
+            </View>
+            <View style={{...styles.sectionContainer}}>
+              <Text style={{...styles.sectionTitle, textAlign:"center", paddingBottom:10}}>
+                IMU
+              </Text>
+              <Plot3DOF
+                title = "acceleration"
+                paths = {["imu/accel/x", "imu/accel/y","imu/accel/z"]}
+                labels =  {["x", "y", "z"]}
+                showY = {true}
+                height = {160}
+              />
+              <Plot3DOF
+                title = "gyroscope"
+                paths = {["imu/gyros/x", "imu/gyros/y","imu/gyros/z"]}
+                labels =  {["x", "y", "z"]}
+                showY = {true}
+                height = {160}
+              />
+              <Plot3DOF
+                title = "magnetometer"
+                paths = {["imu/magne/x", "imu/magne/y","imu/magne/z"]}
+                labels =  {["x", "y", "z"]}
+                showY = {true}
+                height = {160}
+              />
             </View>
           </ScrollView>
         </SafeAreaView>

@@ -34,12 +34,12 @@
   [X] Show yaw and pitch angles
   [] Test with Robot
 
-[] Add diagnostics GUI
-  [] CPU Usage
-  [] Battery
-  [] Accelerometer
-  [] Gyros
-  [] Magnetometer
+[X] Add diagnostics GUI
+  [X] CPU Usage
+  [X] Battery
+  [X] Accelerometer
+  [X] Gyros
+  [X] Magnetometer
 
 [X] clean up unnecessary imports on files
 
