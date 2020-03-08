@@ -21,7 +21,6 @@ class PidControls extends React.PureComponent {
   render() {
     let {enabled, client} = this.props;
     let {kp, ki, kd, setpoint} = this.props;
-    console.log(kp)
 
     let disableGains = false;
     let disableSetpoint = false;

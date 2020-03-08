@@ -8,8 +8,6 @@ import * as shape from 'd3-shape';
 
 import { connect } from 'react-redux';
 
-import { newData } from '../state/reducer';
-
 import { colors as styleColors } from "../style/style.js";
 
 class PlotMulti extends React.PureComponent {

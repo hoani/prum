@@ -18,6 +18,15 @@ const batteryValues = [
   6.5, 6.6, 6.8, 6.9, 7.1, 7.2, 7.3,
 ]
 
+const motorLeftValues = [
+  1.0, 1.0, 0.0, 0.0, -1.0, -1.0, -0.5, -0.5, -0.5, -0.5, -1.0, -1.0, -1.0, 0.5, 0.5,
+  -1.0, -1.0, 0.0, 0.0, 1.0, 1.0, 0.5, 0.5, 0.5, 0.5, 1.0, 1.0, 1.0, -0.5, -0.5,
+]
+
+const motorRightValues = [
+  -1.0, -1.0, 0.0, 0.0, 1.0, 1.0, 0.5, 0.5, 0.5, 0.5, 1.0, 1.0, 1.0, -0.5, -0.5,
+]
+
 export default class Client {
   constructor(port = 11337, host, codec, store) {
     this.interval = null;
@@ -41,6 +50,10 @@ export default class Client {
 
     this.addItem('health/os/cpuse', [40.0], 15.0);
     this.addItem('health/batt/v', batteryValues, 0.0);
+
+    this.addItem('motor/left', motorLeftValues, 0.0);
+    this.addItem('motor/right', motorRightValues, 0.0);
+
   }
 
   addItem(key, profile, noise) {

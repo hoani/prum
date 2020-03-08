@@ -8,10 +8,9 @@ import {
   StatusBar,
 } from 'react-native';
 
-import Image from 'react-native-scalable-image';
-
 import { Icon } from 'react-native-elements';
 
+import PlotBar from '../charts/plotBar';
 import PlotMulti from '../charts/plotMulti';
 import ProgressCircle from '../charts/progressCircle';
 import BatteryGauge from '../charts/batteryGauge';
@@ -55,11 +54,9 @@ export default class ManualScreen extends React.Component {
           >
             <View style={{...styles.body}}>
               <View style={{...styles.sectionContainer, flexDirection:"row"}}>
-                <View style={{flexDirection:"column"}}>
-                  <ManualButton iconName='angle-double-up' direction='FW'/>
-                  <ManualButton iconName='angle-double-down' direction='BW'/>
+                <View style={{flex:1, flexDirection:"column"}}>
                 </View>
-                <View style={{flex:1, flexDirection: "row"}}>
+                <View style={{flex:2, flexDirection: "row"}}>
                   <View style={{flex:1, flexDirection: "column"}}>
                     <Text style={{...styles.label, textAlign:"center", padding:4}}>CPU %</Text>
                     <View style={{flex:1}}>
@@ -72,6 +69,39 @@ export default class ManualScreen extends React.Component {
                       <BatteryGauge path="health/batt/v" height={96} />
                     </View>
                   </View>
+                </View>
+              </View>
+              <View style={{...styles.sectionContainer, flexDirection:"column"}}>
+                <Text style={{...styles.sectionTitle, textAlign:"center"}}>
+                  Motor Output
+                </Text>
+                <View style={{flexDirection:"row"}}>
+                  <View style={{flexDirection:"column"}}>
+                    <ManualButton iconName='angle-double-up' direction='FW'/>
+                    <ManualButton iconName='angle-double-down' direction='BW'/>
+                  </View>
+                  <View style={{flex:1, flexDirection: "row"}}>
+                    <View style={{flex:1, flexDirection: "column"}}>
+                      <View style={{flex:1}}>
+                        <PlotBar
+                          paths={["motor/left", "motor/right"]}
+                          showY={true}
+                          labels={["Left", "Right"]}
+                          colors={[colors.p300, colors.p100]}
+                          height={120}
+                        />
+                      </View>
+                    </View>
+                  </View>
+                </View>
+                <View style={{flexDirection:"row"}}>
+                  <PlotMulti
+                    paths={["motor/left", "motor/right"]}
+                    showY={true}
+                    labels={["Left", "Right"]}
+                    colors={[colors.p300, colors.p100]}
+                    height={120}
+                  />
                 </View>
               </View>
             </View>
