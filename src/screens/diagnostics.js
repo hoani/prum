@@ -53,20 +53,25 @@ export default class ManualScreen extends React.Component {
             style={{flex:1, ...styles.scrollView}}
           >
             <View style={{...styles.body}}>
-              <View style={{...styles.sectionContainer, flexDirection:"row"}}>
-                <View style={{flex:1, flexDirection:"column"}}>
-                </View>
-                <View style={{flex:2, flexDirection: "row"}}>
-                  <View style={{flex:1, flexDirection: "column"}}>
-                    <Text style={{...styles.label, textAlign:"center", padding:4}}>CPU %</Text>
-                    <View style={{flex:1}}>
-                      <ProgressCircle path="health/os/cpuse" multiplier={0.01} unit="%" decimalPlaces={1} height={96} />
-                    </View>
+              <View style={{...styles.sectionContainer, flexDirection:"column"}}>
+                <Text style={{...styles.sectionTitle, textAlign:"center"}}>
+                  Health
+                </Text>
+                <View style={{flex:1, flexDirection:"row"}}>
+                  <View style={{flex:0, flexDirection:"column"}}>
                   </View>
-                  <View style={{flex:1, flexDirection: "column"}}>
-                    <Text style={{...styles.label, textAlign: "center", padding:4}}>Battery</Text>
-                    <View style={{flex:1}}>
-                      <BatteryGauge path="health/batt/v" height={96} />
+                  <View style={{flex:2, flexDirection: "row"}}>
+                    <View style={{flex:1, flexDirection: "column"}}>
+                      <Text style={{...styles.label, textAlign:"center", padding:4}}>CPU %</Text>
+                      <View style={{flex:1}}>
+                        <ProgressCircle path="health/os/cpuse" multiplier={0.01} unit="%" decimalPlaces={1} height={96} />
+                      </View>
+                    </View>
+                    <View style={{flex:1, flexDirection: "column"}}>
+                      <Text style={{...styles.label, textAlign: "center", padding:4}}>Battery</Text>
+                      <View style={{flex:1}}>
+                        <BatteryGauge path="health/batt/v" height={96} />
+                      </View>
                     </View>
                   </View>
                 </View>
@@ -79,6 +84,10 @@ export default class ManualScreen extends React.Component {
                   <View style={{flexDirection:"column"}}>
                     <ManualButton iconName='angle-double-up' direction='FW'/>
                     <ManualButton iconName='angle-double-down' direction='BW'/>
+                  </View>
+                  <View style={{flexDirection:"column"}}>
+                    <ManualButton iconName='angle-double-left' direction='LT'/>
+                    <ManualButton iconName='angle-double-right' direction='RT'/>
                   </View>
                   <View style={{flex:1, flexDirection: "row"}}>
                     <View style={{flex:1, flexDirection: "column"}}>
